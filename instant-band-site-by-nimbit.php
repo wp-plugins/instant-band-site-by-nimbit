@@ -3,7 +3,7 @@
  Plugin Name: Instant Band Site by Nimbit
  Plugin URI:
  Description: With four easy steps this plugin will set you up with a complete site for your music.  Once You are done you will have combined the smartest website software with the best music business platform.
- Version: 0.1
+ Version: 0.1.3
  Author: Nimbit
  Author URI:
  License: GPL2
@@ -42,7 +42,7 @@ if ( is_admin() ){
 
 	//create Nimbit admin menu
 	function nimbit_admin_menu() {
-		add_menu_page('Nimbit', 'Nimbit', 'administrator', 'nimbit-admin', 'nimbit_plugin_page', plugins_url($path = '/my-plugin').'/images/whitelogo.jpg');
+		add_menu_page('Nimbit', 'Nimbit', 'administrator', 'nimbit-admin', 'nimbit_plugin_page', plugins_url($path = '/instant-band-site-by-nimbit').'/images/whitelogo.jpg');
 		//add_submenu_page( 'nimbit-admin', 'nimbit-dash', 'Nimbit Dash' , 'administrator', 'nimbit-dash', 'nimbit_dash');
 	}
 }
@@ -586,16 +586,16 @@ class nimbit_social {
 	$facebook_code='';
 	$youtube_code='';
 	if($data['twitter']=='yes'){
-		$twitter_code='<a href="http://twitter.com/'.$data['twitteruser'].'"><img src="'.plugins_url($path = '/my-plugin').'/images/twitter.png" /></a>';
+		$twitter_code='<a href="http://twitter.com/'.$data['twitteruser'].'"><img src="'.plugins_url($path = '/instant-band-site-by-nimbit').'/images/twitter.png" /></a>';
 	}
 	if($data['myspace']=='yes'){
-		$myspace_code='<a href="http://myspace.com/'.$data['myspaceuser'].'"><img src="'.plugins_url($path = '/my-plugin').'/images/myspace.png" /></a>';
+		$myspace_code='<a href="http://myspace.com/'.$data['myspaceuser'].'"><img src="'.plugins_url($path = '/instant-band-site-by-nimbit').'/images/myspace.png" /></a>';
 	}
 	if($data['facebook']=='yes'){
-		$facebook_code='<a href="http://facebook.com/'.$data['facebookuser'].'"><img src="'.plugins_url($path = '/my-plugin').'/images/facebook.png" /></a>';
+		$facebook_code='<a href="http://facebook.com/'.$data['facebookuser'].'"><img src="'.plugins_url($path = '/instant-band-site-by-nimbit').'/images/facebook.png" /></a>';
 	}
 	if($data['youtube']=='yes'){
-		$youtube_code='<a href="http://youtube.com/user/'.$data['youtubeuser'].'"><img src="'.plugins_url($path = '/my-plugin').'/images/youtube.png" /></a>';
+		$youtube_code='<a href="http://youtube.com/user/'.$data['youtubeuser'].'"><img src="'.plugins_url($path = '/instant-band-site-by-nimbit').'/images/youtube.png" /></a>';
 	}
 	echo $args['before_widget'];
     echo $args['before_title'] . $data['title'] . $args['after_title'];

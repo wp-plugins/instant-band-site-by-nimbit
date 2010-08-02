@@ -4,7 +4,7 @@ Donate link:
 Tags: music, nimbit, band, band sites, band websites
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 
 Easily create a complete artist-band website with fan signup, gig listings, storefront and more… (this can only be 150 characters)
 

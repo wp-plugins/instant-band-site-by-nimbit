@@ -1,10 +1,10 @@
-=== Nimbit's Instand Band Site ===
+=== Instant Band Site by Nimbit ===
 Contributors: ses282
 Donate link: 
 Tags: music, nimbit, band, band sites, band websites
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 0.1
+Stable tag: 0.1.2
 
 Easily create a complete artist-band website with fan signup, gig listings, storefront and more… (this can only be 150 characters)
 
@@ -13,8 +13,9 @@ Easily create a complete artist-band website with fan signup, gig listings, stor
 Nimbit is a direct to fan platform devoted to giving artists and their teams the tools to create, nurture and monetize a supportive fan base.  
 With this plugin creating a music website for an artist or band is easier than ever.  This plugin automatically connects a Nimbit artist account 
 to your wordpress site by simply entering your Nimbit username. Five pages are created that cover the most popular content required for a music 
-“web presence”, including: calendar, storefront, bio, contact and gallery. These pages are automatically populated and updated from your Nimbit artist account. 
+"web presence", including: calendar, storefront, bio, contact and gallery. These pages are automatically populated and updated from your Nimbit artist account. 
 Whenever you update your Nimbit profile your site is automatically updated which makes for the easiest management of your website after its creation.
+
 The site that is created for you will contain sidebar widgets with multiple fan capture tools as well to help you expand and engage your fan base. 
 Our Email Signup, and promomtional code widgets will allow fans to easily interact with you in a way that will encourage further interaction with 
 your band. We also provide a social site sidebar widget in which you can connect your sites on the most popular social sites in one step.
@@ -46,7 +47,7 @@ designed to give you a simple, quick customized website to get you an instant we
 = What is Nimbit? =
 
 Nimbit is a direct to fan platform that provides artists and their teams all the tools necessary to create, nurture, and monetize a supportive fan base.  
-To learn more about Nimbit visit their site <a href="http://www.nimbit.com">here</a>.
+To learn more about Nimbit visit the site <a href="http://www.nimbit.com">here</a>.
 
 = How can I sign up for Nimbit? =
 

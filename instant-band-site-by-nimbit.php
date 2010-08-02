@@ -116,7 +116,7 @@ function nimbit_install() {
 	add_option('nimbit_delete', 'not', 'this is nimbit', 'yes');
 }
 //call nimbit_install when plugin activated
-register_activation_hook(instant-band-site-by-nimbit.php','nimbit_install');
+register_activation_hook('instant-band-site-by-nimbit.php','nimbit_install');
 
 /* function : is called when plugin is deactivated and deletes the
    username and artist options that were created by plugin

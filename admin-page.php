@@ -137,7 +137,7 @@
 								<div class="handlediv" title="Click to toggle"><br /></div>
 								<h3 class='hndle'><span>Like This Plugin?</span></h3> 
 								<div class="inside"> 
-									<p>If you like this plugin please rate it <a>here</a>!!</p>
+									<p>If you like this plugin please rate it <a href="http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/">here</a>!!</p>
 								</div> 
 						</div>						
 					</div>
@@ -149,18 +149,6 @@
 									<p>Fill out this short feedback survey <a href="http://content.nimbit.com/machform/view.php?id=25" title="Instant Band Site Feedback Form">here</a> 
 									 and let us know any problems you ran into or any ideas you have for future features you would love
 									 for us to add to the plugin!</p>
-								</div> 
-						</div>						
-					</div>
-					<div class="postbox-container" style="width:29%;"> 
-							<div id="dashboard_right_now" class="postbox" > 
-								<div class="handlediv" title="Click to toggle"><br /></div>
-								<h3 class='hndle'><span>Nimbit Latest News</span></h3> 
-								<div class="inside"> 
-									<h2>New Dashboard!</h2>
-									<p>here are the cool things about the new dash</p>
-									<h2>Fan Map</h2>
-									<p>Track your fans around the world!</p>
 								</div> 
 						</div>						
 					</div>

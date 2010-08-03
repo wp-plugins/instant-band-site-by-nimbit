@@ -116,7 +116,7 @@ function nimbit_install() {
 	add_option('nimbit_delete', 'not', 'this is nimbit', 'yes');
 }
 //call nimbit_install when plugin activated
-register_activation_hook('instant-band-site-by-nimbit.php','nimbit_install');
+register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php','nimbit_install');
 
 /* function : is called when plugin is deactivated and deletes the
    username and artist options that were created by plugin
@@ -129,9 +129,10 @@ function nimbit_remove() {
 	delete_option('nimbit_pages');
 	delete_option('nimbit_delete');
 	delete_option('nimbit_page');
+	
 }
 //call nimbit_remove when plugin deactivated
-register_deactivation_hook('instant-band-site-by-nimbit.php', 'nimbit_remove' );
+register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', 'nimbit_remove' );
 
 /* function : create main plugin page
 */
@@ -296,8 +297,8 @@ function nimbit_get_content($pagetitle){
 //Nimbit Subscribe Widget
 //error_reporting(E_ALL);
 add_action("widgets_init", array('nimbit_subscribe', 'register'));
-register_activation_hook('instant-band-site-by-nimbit.php', array('nimbit_subscribe', 'activate'));
-register_deactivation_hook('instant-band-site-by-nimbit.php', array('nimbit_subscribe', 'deactivate'));
+register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_subscribe', 'activate'));
+register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_subscribe', 'deactivate'));
 class nimbit_subscribe {
 	function activate(){
 		$data = array( 'title' => 'Email Signup');
@@ -337,8 +338,8 @@ class nimbit_subscribe {
 
 //Nimbit Next Gig Widget
 add_action("widgets_init", array('nimbit_nextgig', 'register'));
-register_activation_hook('instant-band-site-by-nimbit.php', array('nimbit_nextgig', 'activate'));
-register_deactivation_hook('instant-band-site-by-nimbit.php', array('nimbit_nextgig', 'deactivate'));
+register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_nextgig', 'activate'));
+register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_nextgig', 'deactivate'));
 class nimbit_nextgig {
 	function activate(){
 		$data = array( 'title' => 'Next Gig');
@@ -374,8 +375,8 @@ class nimbit_nextgig {
 }
 //promo widget
 add_action("widgets_init", array('nimbit_promo', 'register'));
-register_activation_hook('instant-band-site-by-nimbit.php', array('nimbit_promo', 'activate'));
-register_deactivation_hook('instant-band-site-by-nimbit.php', array('nimbit_promo', 'deactivate'));
+register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_promo', 'activate'));
+register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_promo', 'deactivate'));
 class nimbit_promo {
 	function activate(){
 		$data = array( 'title' => 'Promo Code');
@@ -416,8 +417,8 @@ class nimbit_promo {
 }
 //facebook widget
 add_action("widgets_init", array('nimbit_fb', 'register'));
-register_activation_hook('instant-band-site-by-nimbit.php', array('nimbit_fb', 'activate'));
-register_deactivation_hook('instant-band-site-by-nimbit.php', array('nimbit_fb', 'deactivate'));
+register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_fb', 'activate'));
+register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_fb', 'deactivate'));
 class nimbit_fb {
 	function activate(){
 		$data = array( 'option1' => 'Default value');
@@ -449,8 +450,8 @@ class nimbit_fb {
 }
 //player widget
 add_action("widgets_init", array('nimbit_player', 'register'));
-register_activation_hook('instant-band-site-by-nimbit.php', array('nimbit_player', 'activate'));
-register_deactivation_hook('instant-band-site-by-nimbit.php', array('nimbit_player', 'deactivate'));
+register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_player', 'activate'));
+register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_player', 'deactivate'));
 class nimbit_player {
 	function activate(){
 		$data = array( 'option1' => 'yes');
@@ -509,8 +510,8 @@ class nimbit_player {
 }
 //social networking
 add_action("widgets_init", array('nimbit_social', 'register'));
-register_activation_hook('instant-band-site-by-nimbit.php', array('nimbit_social', 'activate'));
-register_deactivation_hook('instant-band-site-by-nimbit.php', array('nimbit_social', 'deactivate'));
+register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_social', 'activate'));
+register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_social', 'deactivate'));
 class nimbit_social {
 	function activate(){
 		$data = array( 'title'=>'', 'twitter' => 'no', 'twitteruser' => '', 'myspace' => 'no', 'myspaceuser' => '', 'facebook' => 'no', 'facebookuser' => '', 'youtube' => 'no', 'youtubeuser' => '');

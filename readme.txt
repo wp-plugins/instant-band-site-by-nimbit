@@ -48,9 +48,15 @@ Nimbit has three different levels of accounts: NimbitFree, NimbitIndie, and Nimb
 
 == Changelog ==
 
+= 0.1.4 =
+* This updated version of the plugin fixes a bug within the plugin.
+
 = 0.1 =
 * This is the first version of this plugin.
 
 == Upgrade Notice ==
+
+= 0.1.4 =
+This version fixes a bug within the setup of the plugin.  You should upgrade to this version of the plugin.
 
 

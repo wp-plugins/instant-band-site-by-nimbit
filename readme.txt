@@ -32,15 +32,15 @@ designed to give you a simple, quick customized website to get you an instant we
 
 == Installation ==
 
-1. Upload the `instant-band-site-by-nimbit` folder to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Click on the "Nimbit" menu that shows up when you activate the plugin
-4. Enter your Nimbit username and click continue
-5. Select which artist you would like to make this site for and click continue
-6. Select which pages you would like to create and click generate
-7. You now have the pages you created that are already populated with you Nimbit content
-8. Select "Put Widgets Into Sidebar" to drag the Nimbit sidebar widgets into your sidebar
-9. Visit the <a>Nimbit Knowledge Base</a> for more detailed directions and directions on easy ways to take your site to the next level.
+1. First click the "Download" button on the right side of your screen to download the plugin.
+2. Upload the `instant-band-site-by-nimbit` folder to the `/wp-content/plugins/` directory
+3. Activate the plugin through the 'Plugins' menu in WordPress
+4. Click on the "Nimbit" menu that shows up when you activate the plugin
+5. Enter your Nimbit username and click continue
+6. Select which artist you would like to make this site for and click continue
+7. Select which pages you would like to create and click generate
+8. You now have the pages you created that are already populated with you Nimbit content
+9. Select "Put Widgets Into Sidebar" to drag the Nimbit sidebar widgets into your sidebar
 
 == Frequently Asked Questions ==
 

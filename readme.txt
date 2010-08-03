@@ -10,25 +10,14 @@ Easily create a complete artist-band website with fan signup, gig listings, stor
 
 == Description ==
 
-Nimbit is a direct to fan platform devoted to giving artists and their teams the tools to create, nurture and monetize a supportive fan base.  
-With this plugin creating a music website for an artist or band is easier than ever.  This plugin automatically connects a Nimbit artist account 
-to your wordpress site by simply entering your Nimbit username. Five pages are created that cover the most popular content required for a music 
-"web presence", including: calendar, storefront, bio, contact and gallery. These pages are automatically populated and updated from your Nimbit artist account. 
-Whenever you update your Nimbit profile your site is automatically updated which makes for the easiest management of your website after its creation.
+Nimbit is the direct to fan platform that gives artists and their teams the tools they need to create, nurture and monetize a supportive fan base.
+With this plugin, it's easier than ever to create a music website for an artist or band. This plugin automatically connects a Nimbit artist account to a WordPress site.  By simply entering your Nimbit username, five pages are instantly created to provide the most popular content demanded by online music fans.  This instant music "web presence" includes: your event calendar, bio, a storefront to purchase and listen to music,  contact information, and a photo gallery. These pages are automatically populated and updated from your Nimbit artist account. Whenever you update your Nimbit profile your website is automatically updated, offering an incredibly easy way to manage your website after its creation.
 
-The site that is created for you will contain sidebar widgets with multiple fan capture tools as well to help you expand and engage your fan base. 
-Our Email Signup, and promomtional code widgets will allow fans to easily interact with you in a way that will encourage further interaction with 
-your band. We also provide a social site sidebar widget in which you can connect your sites on the most popular social sites in one step.
+Your artist site can contain multiple fan capture tools as sidebar widgets to help you expand and engage your fan base. Our Email Signup, and promomtional code widgets will allow fans to easily interact with you in a way that will encourage further interaction with your band. You can connect your website to the most popular social sites (like Facebook) in one step with our social site sidebar widget. 
 
-Yes, it's that easy. No copying and pasting code into places that might not end up working, we do it all for you! Just provide us with your username
- and this nifty plug-in will do the rest. Why would you spend the time creating pages for your website and filling them with content when all you have 
- to do is hit one button?
- 
-You will need a Nimbit account to activate this plug-in (you can get a free one here) you can either set up your content within Nimbit before or after 
-you use this plugin. Either way your site will be filled with this content once it is in your Nimbit account.
+Yes, it's that easy, Nimbit takes care of the hard stuff. You don't need to pay someone else to create your website or spend hours coding it yourself, and you won't have to worry about copying and pasting code into places that might not end up working; we do it all for you! Just provide your Nimbit username and this nifty plug-in will do the rest. 
 
-Although this plug-in will work with most wordpress themes, Nimbit also has these artist/band themes available for FREE at [url here]. These themes are 
-designed to give you a simple, quick customized website to get you an instant web presence.
+You will need a Nimbit account to activate and start using this plug-in (you can get a free one <a href="http://www.nimbit.com/plans-pricing/">here</a>). You can set up your artist content (music, photos, merchandise, etc.) with Nimbit either before or after you use this plugin. Once your artist content is in your Nimbit account your site will be populated with it.
 
 == Installation ==
 

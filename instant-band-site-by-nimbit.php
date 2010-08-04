@@ -1,7 +1,7 @@
 <?php
 /*
  Plugin Name: Instant Band Site by Nimbit
- Plugin URI:
+ Plugin URI: http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/
  Description: With four easy steps this plugin will set you up with a complete site for your music.  Once You are done you will have combined the smartest website software with the best music business platform.
  Version: 0.1.4
  Author: Nimbit
@@ -180,7 +180,7 @@ function nimbit_plugin_page() {
 			<input class='button-primary' type="submit" value="<?php _e('Continue') ?>" />
 			</td>
 			<td>
-			Sign up for a free Nimbit account <a href="http://www.nimbit.com/plans-pricing">here</a>.
+			Sign up for a free Nimbit account <a href="http://www.nimbit.com/plans-pricing/?wpdash">here</a>.
 			</td>
 		</tr>
 		</table>

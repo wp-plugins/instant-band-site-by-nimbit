@@ -1,7 +1,7 @@
 === Instant Band Site by Nimbit ===
 Contributors: ses282
 Donate link: 
-Tags: music, nimbit, band, band sites, band websites
+Tags: music, nimbit, band, band sites, band websites, band store, store, sell, digital, music, sell digital music
 Requires at least: 3.0
 Tested up to: 3.0
 Stable tag: 0.1.4
@@ -17,7 +17,7 @@ Your artist site can contain multiple fan capture tools as sidebar widgets to he
 
 Yes, it's that easy, Nimbit takes care of the hard stuff. You don't need to pay someone else to create your website or spend hours coding it yourself, and you won't have to worry about copying and pasting code into places that might not end up working; we do it all for you! Just provide your Nimbit username and this nifty plug-in will do the rest. 
 
-You will need a Nimbit account to activate and start using this plug-in (you can get a free one <a href="http://www.nimbit.com/plans-pricing/">here</a>). You can set up your artist content (music, photos, merchandise, etc.) with Nimbit either before or after you use this plugin. Once your artist content is in your Nimbit account your site will be populated with it.
+You will need a Nimbit account to activate and start using this plug-in (you can get a free one <a href="http://www.nimbit.com/plans-pricing/?wpdesc1">here</a>). You can set up your artist content (music, photos, merchandise, etc.) with Nimbit either before or after you use this plugin. Once your artist content is in your Nimbit account your site will be populated with it.
 
 == Installation ==
 
@@ -36,12 +36,12 @@ You will need a Nimbit account to activate and start using this plug-in (you can
 = What is Nimbit? =
 
 Nimbit is a direct to fan platform that provides artists and their teams all the tools necessary to create, nurture, and monetize a supportive fan base.  
-To learn more about Nimbit visit the site <a href="http://www.nimbit.com">here</a>.
+To learn more about Nimbit visit the site <a href="http://www.nimbit.com/?wpfaq1">here</a>.
 
 = How can I sign up for Nimbit? =
 
 Nimbit has three different levels of accounts: NimbitFree, NimbitIndie, and NimbitPro.  You can learn more about the different types of accounts 
-<a href="http://www.nimbit.com/plans-pricing/">here</a>.
+<a href="http://www.nimbit.com/plans-pricing/?wpfaq2">here</a>.
 
 
 == Screenshots ==

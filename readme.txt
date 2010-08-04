@@ -41,7 +41,7 @@ To learn more about Nimbit visit the site <a href="http://www.nimbit.com/?wpfaq1
 = How can I sign up for Nimbit? =
 
 Nimbit has three different levels of accounts: NimbitFree, NimbitIndie, and NimbitPro.  You can learn more about the different types of accounts 
-<a href="http://www.nimbit.com/plans-pricing/wpfaq2">here</a>.
+<a href="http://www.nimbit.com/plans-pricing/?wpfaq2">here</a>.
 
 
 == Screenshots ==

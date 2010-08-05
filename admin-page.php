@@ -84,11 +84,11 @@
 								//the edit links take you to the Nimbit dashboard where you can edit that specific content tag
 								//the delete links delete that specific page
 								?><tr><td><form method="post" action="options.php"><?php wp_nonce_field('update-options');
-								?><p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="nimbit_page[]" checked value="Store"<?php if($checked['Store']=='checked'){print('disabled');} ?>/>  Store Front (Skin Store)<?php if($checked['Store']=='checked'){print('  <a href="http://members.nimbit.com/dashboard/main/store_appearance.php">edit content</a>   <a href="admin.php?page=nimbit-admin&del='.$id['Store'].'">delete</a>');}?></p>
+								?><p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="nimbit_page[]" checked value="Store"<?php if($checked['Store']=='checked'){print('disabled');} ?>/>  Store Front (Skin Store Pro Account Only)<?php if($checked['Store']=='checked'){print('  <a href="http://members.nimbit.com/dashboard/main/store_appearance.php">edit content</a>   <a href="admin.php?page=nimbit-admin&del='.$id['Store'].'">delete</a>');}?></p>
 								<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="nimbit_page[]" checked value="Events"<?php if($checked['Events']=='checked'){print('disabled');} ?>/>  Events<?php if($checked['Events']=='checked'){print('  <a href="http://members.nimbit.com/dashboard/main/events.php">edit content</a>   <a href="admin.php?page=nimbit-admin&del='.$id['Events'].'"> delete</a>');}?></p>
 								<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="nimbit_page[]" checked value="Photos"<?php if($checked['Photos']=='checked'){print('disabled');} ?>/>  Photos<?php if($checked['Photos']=='checked'){print('  <a href="admin.php?page=nimbit-admin&del='.$id['Photos'].'">delete</a>');}?></p>
 								<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="nimbit_page[]" checked value="Bio"<?php if($checked['Bio']=='checked'){print('disabled');} ?>/>  Bio<?php if($checked['Bio']=='checked'){print('  <a href="http://members.nimbit.com/dashboard/main/basicinfo.php">edit content</a>   <a href="admin.php?page=nimbit-admin&del='.$id['Bio'].'">delete</a>');}?></p>
-								<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="nimbit_page[]" checked value="News"<?php if($checked['News']=='checked'){print('disabled');} ?>/>  News<?php if($checked['News']=='checked'){print('  <a href="http://members.nimbit.com/dashboard/main/news.php">edit content</a>   <a href="admin.php?page=nimbit-admin&del='.$id['News'].'">delete</a>');}?></p>
+								<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="nimbit_page[]" checked value="News"<?php if($checked['News']=='checked'){print('disabled');} ?>/>  News (with Pro Account Only)<?php if($checked['News']=='checked'){print('  <a href="http://members.nimbit.com/dashboard/main/news.php">edit content</a>   <a href="admin.php?page=nimbit-admin&del='.$id['News'].'">delete</a>');}?></p>
 								<input type="hidden" name="action" value="update" />
 								<input type="hidden" name="nimbit_pages" value="somepages" />
 								<input type="hidden" name="page_options" value="nimbit_pages,nimbit_page" />
@@ -110,7 +110,8 @@
 								<tr>
 									<td><ul>
 										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Streampad Music Player</strong> Widget</li>
-										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Promotion Code</strong> Widget <a href="http://members.nimbit.com/dashboard/main/promo_offers.php">edit content</a> </li>
+										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Streampad Music Player</strong> Widget</li>
+										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Promotion Code</strong> Widget (with Indie and Pro Accounts) <a href="http://members.nimbit.com/dashboard/main/promo_offers.php">edit content</a> </li>
 										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Standard Email Form</strong> Widget</li>
 										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Next Gig</strong> Widget <a href="http://members.nimbit.com/dashboard/main/events.php">edit content</a>  </li>
 										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Facebook Like</strong> Widget </li>

@@ -11,7 +11,7 @@ Easily create a complete artist-band website with fan signup, gig listings, stor
 == Description ==
 
 Nimbit is the direct to fan platform that gives artists and their teams the tools they need to create, nurture and monetize a supportive fan base.
-With this plugin, it's easier than ever to create a music website for an artist or band. This plugin automatically connects a Nimbit artist account to a WordPress site.  By simply entering your Nimbit username, five pages are instantly created to provide the most popular content demanded by online music fans.  This instant music "web presence" includes: your event calendar, bio, a storefront to purchase and listen to music,  contact information, and a photo gallery. These pages are automatically populated and updated from your Nimbit artist account. Whenever you update your Nimbit profile your website is automatically updated, offering an incredibly easy way to manage your website after its creation.
+With this plugin, it's easier than ever to create a music website for an artist or band. This plugin automatically connects a Nimbit artist account to a WordPress site.  By simply entering your Nimbit username, five pages are instantly created to provide the most popular content demanded by online music fans.  This instant music "web presence" includes: your event calendar, bio, a storefront to purchase and listen to music, and a page for your photo gallery. These pages are automatically populated and updated from your Nimbit artist account. Whenever you update your Nimbit profile your website is automatically updated, offering an incredibly easy way to manage your website after its creation.
 
 Your artist site can contain multiple fan capture tools as sidebar widgets to help you expand and engage your fan base. Our Email Signup, and promomtional code widgets will allow fans to easily interact with you in a way that will encourage further interaction with your band. You can connect your website to the most popular social sites (like Facebook) in one step with our social site sidebar widget. 
 
@@ -21,7 +21,7 @@ You will need a Nimbit account to activate and start using this plug-in (you can
 
 == Installation ==
 
-1. First click the "Download" button on the right side of your screen to download the plugin.
+1. First click the "Download" button on the right side of your screen to download the plugin
 2. Upload the `instant-band-site-by-nimbit` folder to the `/wp-content/plugins/` directory
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Click on the "Nimbit" menu that shows up when you activate the plugin

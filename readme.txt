@@ -19,6 +19,10 @@ Yes, it's that easy, Nimbit takes care of the hard stuff. You don't need to pay 
 
 You will need a Nimbit account to activate and start using this plug-in (you can get a free one <a href="http://www.nimbit.com/plans-pricing/?wpdesc1">here</a>). You can set up your artist content (music, photos, merchandise, etc.) with Nimbit either before or after you use this plugin. Once your artist content is in your Nimbit account your site will be populated with it.
 
+Although this plug-in will work with most WordPress themes, to make this plug-in more effective Nimbit also has FREE artist/band themes created by a professional designer who has worked with many top bands.  You can download these FREE themes <a href="http://www.nimbit.com/instant-band-site/">here</a>. These themes are designed to give you a simple, quick customized website to get you an instant web presence.
+
+You can learn more <a href="http://www.nimbit.com/instant-band-site/">here</a>.
+
 == Installation ==
 
 1. First click the "Download" button on the right side of your screen to download the plugin

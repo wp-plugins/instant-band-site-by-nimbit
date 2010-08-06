@@ -109,7 +109,7 @@
 								</tr>
 								<tr>
 									<td><ul>
-										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Streampad Music Player</strong> Widget</li>
+										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Social Sites</strong> Widget</li>
 										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Streampad Music Player</strong> Widget</li>
 										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Promotion Code</strong> Widget (Indie and Pro Accounts only) <a href="http://members.nimbit.com/dashboard/main/promo_offers.php">edit content</a> </li>
 										<li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <strong>Standard Email Form</strong> Widget</li>

@@ -4,7 +4,7 @@ Donate link:
 Tags: music, nimbit, band, band sites, band websites, band store, store, sell, digital, music, sell digital music
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 0.1.4
+Stable tag: 0.1.5
 
 Easily create a complete artist-band website with fan signup, gig listings, storefront and more...
 
@@ -58,5 +58,8 @@ Nimbit has three different levels of accounts: NimbitFree, NimbitIndie, and Nimb
 
 = 0.1.4 =
 This version fixes a bug within the setup of the plugin.  You should upgrade to this version of the plugin.
+
+= 0.1.5 =
+This version makes some minor changes to the Nimbit Options Page
 
 

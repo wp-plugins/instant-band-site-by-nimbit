@@ -3,7 +3,7 @@
  Plugin Name: Instant Band Site by Nimbit
  Plugin URI: http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/
  Description: With four easy steps this plugin will set you up with a complete site for your music.  Once You are done you will have combined the smartest website software with the best music business platform.
- Version: 0.1.5
+ Version: 0.1.6
  Author: Nimbit
  Author URI:
  License: GPL2
@@ -404,7 +404,7 @@ class nimbit_promo {
 		$data = get_option('nimbit_artist');
 		echo 'Enter your promotional code here:';
 		echo '<form method="post" action="http://www.nimbitmusic.com/nrp/controllers/download_card.php">
-				<input type="hidden" name="dirname" value='.$data.'/>
+				<input type="hidden" name="dirname" value="'.$data.'"/>
 				<input type="text" size="20" name="code" />
 				<input type="submit" value="Redeem Code" />
 			</form>';

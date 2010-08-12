@@ -4,7 +4,7 @@ Donate link:
 Tags: music, nimbit, band, band sites, band websites, band store, store, sell, digital, music, sell digital music
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 0.1.5
+Stable tag: 0.1.6
 
 Easily create a complete artist-band website with fan signup, gig listings, storefront and more...
 
@@ -52,6 +52,9 @@ Nimbit has three different levels of accounts: NimbitFree, NimbitIndie, and Nimb
 
 == Changelog ==
 
+= 0.1.6 =
+* This updated version of the plugin fixes the Promo Redemption Sidebar Widget.
+
 = 0.1.4 =
 * This updated version of the plugin fixes a bug within the plugin.
 
@@ -65,5 +68,8 @@ This version fixes a bug within the setup of the plugin.  You should upgrade to 
 
 = 0.1.5 =
 This version makes some minor changes to the Nimbit Options Page
+
+= 0.1.6 =
+This updated version of the plugin fixes the Promo Redemption Sidebar Widget.
 
 

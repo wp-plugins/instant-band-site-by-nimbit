@@ -272,7 +272,7 @@ function nimbit_get_content($pagetitle){
 	$bandname = get_option('nimbit_artist');
 	$photo = '<script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/photo/original/"></script>';
 	$bio = '<p><script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/profile"></script></p>';
-	$calendar = '<script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/calendar?nrt_mode=true&previous=-2"></script>';
+	$calendar = '<script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/calendar?nrt_mode=true&previous=-2&direction=1"></script>';
 	$news = '<script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/news"></script>';
 	$skin = '<div id="embed_parent">
  <script src="http://www.nimbitmusic.com/nrp/includes/javascript/flashembed.js"></script>

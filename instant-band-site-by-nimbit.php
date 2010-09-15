@@ -3,7 +3,7 @@
  Plugin Name: Instant Band Site by Nimbit
  Plugin URI: http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/
  Description: With four easy steps this plugin will set you up with a complete site for your music.  Once You are done you will have combined the smartest website software with the best music business platform.
- Version: 0.1.7
+ Version: 0.1.8
  Author: Nimbit
  Author URI:
  License: GPL2
@@ -47,7 +47,7 @@ if ( is_admin() ){
 	function nimbit_admin_menu() {
 		add_menu_page('Nimbit', 'Nimbit', 'administrator', 'nimbit-admin', 'nimbit_plugin_page', plugins_url($path = '/instant-band-site-by-nimbit').'/images/whitelogo.jpg');
 		add_submenu_page( 'nimbit-admin', 'Install / Reset Nimbit Storefront', 'Install / Reset' , 'administrator', 'nimbit-admin');
-		add_submenu_page( 'nimbit-admin', 'Nimbit Storefront Style', 'Storefront Style' , 'administrator', 'nimbit-style', 'nimbit_style');
+		add_submenu_page( 'nimbit-admin', 'Nimbit Storefront Style', 'Storefront Style' , 'administrator', 'nimbit-style', 'nimbit_mystore_style');
 		add_submenu_page( 'nimbit-admin', 'Advanced Style', 'Advanced Style' , 'administrator', 'nimbit-advanced', 'nimbit_advanced');
 		//add_submenu_page( 'nimbit-admin', 'Nimbit Storefront Style', 'Storefront Style' , 'administrator', 'admin.php?page=instant-band-site-by-nimbit/nimbit_style.php');
 		//add_submenu_page( 'nimbit-admin', 'nimbit-dash', 'Nimbit Dash' , 'administrator', 'nimbit-dash', 'nimbit_dash');
@@ -162,7 +162,7 @@ function image_size_input($size, $checked)
 EOT;
 }
 
-function nimbit_style()
+function nimbit_mystore_style()
 {
   strlen($nimbit_image_size  = get_option('nimbit_image_size')) or $nimbit_image_size = 150;
 

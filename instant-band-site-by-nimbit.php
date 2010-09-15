@@ -3,7 +3,7 @@
  Plugin Name: Instant Band Site by Nimbit
  Plugin URI: http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/
  Description: With four easy steps this plugin will set you up with a complete site for your music.  Once You are done you will have combined the smartest website software with the best music business platform.
- Version: 0.1.8
+ Version: 0.1.9
  Author: Nimbit
  Author URI:
  License: GPL2
@@ -47,7 +47,7 @@ if ( is_admin() ){
 	function nimbit_admin_menu() {
 		add_menu_page('Nimbit', 'Nimbit', 'administrator', 'nimbit-admin', 'nimbit_plugin_page', plugins_url($path = '/instant-band-site-by-nimbit').'/images/whitelogo.jpg');
 		add_submenu_page( 'nimbit-admin', 'Install / Reset Nimbit Storefront', 'Install / Reset' , 'administrator', 'nimbit-admin');
-		add_submenu_page( 'nimbit-admin', 'Nimbit Storefront Style', 'Storefront Style' , 'administrator', 'nimbit-style', 'nimbit_mystore_style');
+		add_submenu_page( 'nimbit-admin', 'Nimbit Storefront Style', 'Storefront Style' , 'administrator', 'nimbit-mystore-style', 'nimbit_mystore_style');
 		add_submenu_page( 'nimbit-admin', 'Advanced Style', 'Advanced Style' , 'administrator', 'nimbit-advanced', 'nimbit_advanced');
 		//add_submenu_page( 'nimbit-admin', 'Nimbit Storefront Style', 'Storefront Style' , 'administrator', 'admin.php?page=instant-band-site-by-nimbit/nimbit_style.php');
 		//add_submenu_page( 'nimbit-admin', 'nimbit-dash', 'Nimbit Dash' , 'administrator', 'nimbit-dash', 'nimbit_dash');
@@ -179,7 +179,7 @@ function nimbit_mystore_style()
 ?>
 <div class="wrap">
 
-<h2 style="border-bottom:1px solid #CCCCCC;padding-bottom:0;"><a class="nav-tab nav-tab-active" href="admin.php?page=nimbit-style">Nimbit Storefront Style</a><a class="nav-tab" href="admin.php?page=nimbit-advanced">Advanced Style</a></h2>
+<h2 style="border-bottom:1px solid #CCCCCC;padding-bottom:0;"><a class="nav-tab nav-tab-active" href="admin.php?page=nimbit-mystore-style">Nimbit Storefront Style</a><a class="nav-tab" href="admin.php?page=nimbit-advanced">Advanced Style</a></h2>
 
 <form method="post" action="options.php" style="border-left:1px solid #cccccc;padding-left:10px;">
 <div style="padding:10px 10px 0px 10px;color:maroon;font-weight:bold;"><script>if (document.location.search && document.location.search.match(/updated/)) document.write('Your settings have been saved.');</script>&nbsp;</div>
@@ -263,7 +263,7 @@ function nimbit_advanced()
 ?>
 <div class="wrap">
 
-<h2 style="border-bottom:1px solid #CCCCCC;padding-bottom:0;"><a class="nav-tab" href="admin.php?page=nimbit-style">Nimbit Storefront Style</a><a class="nav-tab nav-tab-active" href="admin.php?page=nimbit-advanced">Advanced Style</a></h2>
+<h2 style="border-bottom:1px solid #CCCCCC;padding-bottom:0;"><a class="nav-tab" href="admin.php?page=nimbit-mystore-style">Nimbit Storefront Style</a><a class="nav-tab nav-tab-active" href="admin.php?page=nimbit-advanced">Advanced Style</a></h2>
 
 <form method="post" action="options.php" style="border-left:1px solid #cccccc;padding-left:10px;">
 <div style="padding:10px 10px 0px 10px;color:maroon;font-weight:bold;"><script>if (document.location.search && document.location.search.match(/updated/)) document.write('Your css has been saved.');</script>&nbsp;</div>

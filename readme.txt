@@ -4,7 +4,7 @@ Donate link:
 Tags: music, nimbit, band, band sites, band websites, band store, store, sell, digital, music, sell digital music
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 0.1.8
+Stable tag: 0.1.9
 
 Easily create a complete artist-band website with fan signup, gig listings, storefront and more...
 
@@ -79,3 +79,6 @@ This newest version of the plugin adds the Nimbit MyStore for Wordpress.
 
 = 0.1.8 =
 Renamed nimbit_style function to avoid conflict with one of the same name used in some Nimbit Wordpress themes.
+
+= 0.1.9 =
+Renamed nimbit-style menu entry to avoid conflict with one of the same name used in some Nimbit Wordpress themes.

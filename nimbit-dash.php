@@ -1,3 +1,5 @@
+<?php require_once 'common.php';?>
+
 <p><strong>The Nimbit Site Generator Plugin can set you up with a site for your music in 4 easy steps.  Once You are done you will have combined the smartest website software with the best music business platform.</strong></p>
 		<p><strong style="color: green;">Your Pages</strong></p>
 		<?php	
@@ -7,8 +9,8 @@
 		$results = get_pages($arguments);
 		$count_pages = 0;
 		if(!empty($results)){
-		$edit_content = array('Music'=>'http://members.nimbit.com/dashboard/main/store_appearance.php','Gigs'=>'http://members.nimbit.com/dashboard/main/events.php',
-		'Photos'=>'','Bio'=>'http://members.nimbit.com/dashboard/main/basicinfo.php','News'=>'http://members.nimbit.com/dashboard/main/news.php');
+		$edit_content = array('Music'=>'http://'.dashboard_host().'/dashboard/main/store_appearance.php','Gigs'=>'http://'.dashboard_host().'/dashboard/main/events.php',
+		'Photos'=>'','Bio'=>'http://'.dashboard_host().'/dashboard/main/basicinfo.php','News'=>'http://'.dashboard_host().'/dashboard/main/news.php');
 			print('<table>');
 			foreach($results as $res){
 				$page_id = $res->ID;

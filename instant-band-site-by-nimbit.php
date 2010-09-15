@@ -3,7 +3,7 @@
  Plugin Name: Instant Band Site by Nimbit
  Plugin URI: http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/
  Description: With four easy steps this plugin will set you up with a complete site for your music.  Once You are done you will have combined the smartest website software with the best music business platform.
- Version: 0.1.6
+ Version: 0.1.7
  Author: Nimbit
  Author URI:
  License: GPL2
@@ -33,6 +33,9 @@
 
 /* function : if the user is an admin then set up Nimbit admin menu
 */
+
+require_once 'common.php';
+
 if ( is_admin() ){
 	//Call the html code 
 	add_action('admin_menu', 'nimbit_admin_menu');
@@ -43,12 +46,25 @@ if ( is_admin() ){
 	//create Nimbit admin menu
 	function nimbit_admin_menu() {
 		add_menu_page('Nimbit', 'Nimbit', 'administrator', 'nimbit-admin', 'nimbit_plugin_page', plugins_url($path = '/instant-band-site-by-nimbit').'/images/whitelogo.jpg');
+		add_submenu_page( 'nimbit-admin', 'Install / Reset Nimbit Storefront', 'Install / Reset' , 'administrator', 'nimbit-admin');
+		add_submenu_page( 'nimbit-admin', 'Nimbit Storefront Style', 'Storefront Style' , 'administrator', 'nimbit-style', 'nimbit_style');
+		add_submenu_page( 'nimbit-admin', 'Advanced Style', 'Advanced Style' , 'administrator', 'nimbit-advanced', 'nimbit_advanced');
+		//add_submenu_page( 'nimbit-admin', 'Nimbit Storefront Style', 'Storefront Style' , 'administrator', 'admin.php?page=instant-band-site-by-nimbit/nimbit_style.php');
 		//add_submenu_page( 'nimbit-admin', 'nimbit-dash', 'Nimbit Dash' , 'administrator', 'nimbit-dash', 'nimbit_dash');
 	}
 }
 
 
 add_action('wp_dashboard_setup', 'nimbit_wp_dashboard_setup');
+
+// define and install hook to update installed store configuration
+//
+function nimbit_update_store($unknown_arg1 = '', $unknown_arg2 = '')
+{
+  nimbit_update_post('Store');
+}
+//
+foreach (nimbit_store_options(true) as $option) add_action("update_option_$option", 'nimbit_update_store');
 
 /**
  * add Dashboard Widget via function wp_add_dashboard_widget()
@@ -87,19 +103,20 @@ function create_given_page($pagetitle, $pagecontent){
 		}
 	}
 	if ($check==0){ //if this page doesn't already exist then create page 
-		$warning = "<!--IMPORTANT: Do not edit this content tag.-->";
 		//create page object
 		$given_page = array();
-		$given_page['comment_status'] = 'open';
-		$given_page['post_content'] = $warning.''.$pagecontent;
+		$given_page['comment_status'] = ($pagetitle == 'Skin' || $pagetitle == 'Store') ? 'closed' : 'open';
+		$given_page['post_content'] = trim($pagecontent)."\n";
 		$given_page['post_status'] = 'publish';
-		$given_page['post_title'] = $pagetitle;
+		$given_page['post_title'] = $pagetitle == 'Skin' ? 'Store' : $pagetitle;
 		$given_page['post_type'] = 'page';
 		//insert page
 		$page_id = wp_insert_post($given_page);
 		//create custom field in order to be able to check later
 		add_post_meta($page_id, 'pagetype', 'nimbitplug');
 		add_post_meta($page_id, 'pagename', $pagetitle);
+		//maintain mapping from page name/title to id
+		update_option("nimbit_page_ids_$pagetitle", $page_id);
 	}
 }
 
@@ -134,12 +151,153 @@ function nimbit_remove() {
 //call nimbit_remove when plugin deactivated
 register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', 'nimbit_remove' );
 
+function image_size_input($size, $checked)
+{
+  $checked = $checked ? 'checked="true"' : '';
+
+  $pixels = $size.'px';
+
+  return <<<EOT
+<input type="radio" name="nimbit_image_size" value="$size" $checked> $pixels
+EOT;
+}
+
+function nimbit_style()
+{
+  strlen($nimbit_image_size  = get_option('nimbit_image_size')) or $nimbit_image_size = 150;
+
+  $nimbit_transparency_color = get_option('nimbit_transparency_color');
+
+  if ($custom_css = get_option('nimbit_custom_css'))
+  {
+    if (trim($custom_css) != trim(nimbit_store_css()))
+    {
+      $warning = "After saving these settings, please review your custom css in the advanced style tab. &nbsp;It may prevent them from taking effect.";
+    }
+  }
+
+?>
+<div class="wrap">
+
+<h2 style="border-bottom:1px solid #CCCCCC;padding-bottom:0;"><a class="nav-tab nav-tab-active" href="admin.php?page=nimbit-style">Nimbit Storefront Style</a><a class="nav-tab" href="admin.php?page=nimbit-advanced">Advanced Style</a></h2>
+
+<form method="post" action="options.php" style="border-left:1px solid #cccccc;padding-left:10px;">
+<div style="padding:10px 10px 0px 10px;color:maroon;font-weight:bold;"><script>if (document.location.search && document.location.search.match(/updated/)) document.write('Your settings have been saved.');</script>&nbsp;</div>
+<?php wp_nonce_field('update-options'); ?>
+<table class="form-table">
+
+<tr valign="top">
+   <th scope="row">Image Size</th>
+   <td width="120"><?php echo image_size_input( 50,  50 == $nimbit_image_size); ?></td>
+   <td><?php echo image_size_input(350, 350 == $nimbit_image_size); ?></td>
+</tr>
+
+<tr valign="top">
+   <th scope="row"></th>
+   <td><?php echo image_size_input(100, 100 == $nimbit_image_size); ?></td>
+   <td><?php echo image_size_input(400, 400 == $nimbit_image_size); ?></td>
+</tr>
+
+<tr valign="top">
+   <th scope="row"></th>
+   <td><?php echo image_size_input(150, 150 == $nimbit_image_size); ?></td>
+   <td><?php echo image_size_input(450, 450 == $nimbit_image_size); ?></td>
+</tr>
+
+<tr valign="top">
+   <th scope="row"></th>
+   <td><?php echo image_size_input(200, 200 == $nimbit_image_size); ?></td>
+   <td><?php echo image_size_input(500, 500 == $nimbit_image_size); ?></td>
+</tr>
+
+<tr valign="top">
+   <th scope="row"></th>
+   <td><?php echo image_size_input(250, 250 == $nimbit_image_size); ?></td>
+   <td><?php echo image_size_input(550, 550 == $nimbit_image_size); ?></td>
+</tr>
+
+<tr valign="top">
+   <th scope="row"></th>
+   <td><?php echo image_size_input(300, 300 == $nimbit_image_size); ?></td>
+   <td><?php echo image_size_input(600, 600 == $nimbit_image_size); ?></td>
+</tr>
+
+<tr valign="top">
+<th scope="row"></th>
+<td colspan="2">&nbsp;</td>
+</tr>
+
+<tr valign="top">
+<th scope="row">Transparency</th>
+<td colspan="2"><input type="radio" name="nimbit_transparency_color" value="#ffffff" <?php echo $nimbit_transparency_color == '#ffffff' ? 'checked="true"' : ''; ?> /> Light (with semi-transparent white background)</td>
+</tr>
+
+<tr valign="top">
+<th scope="row"></th>
+<td colspan="2"><input type="radio" name="nimbit_transparency_color" value="#000000" <?php echo $nimbit_transparency_color == '#000000' ? 'checked="true"' : ''; ?> /> Dark (with semi-transparent black background)</td>
+</tr>
+
+<tr valign="top">
+<th scope="row"></th>
+<td colspan="2"><input type="radio" name="nimbit_transparency_color" value="" <?php echo $nimbit_transparency_color == '' ? 'checked="true"' : ''; ?> /> Clear (with no background)</td>
+</tr>
+
+</table>
+
+<input type="hidden" name="action" value="update" />
+<input type="hidden" name="page_options" value="nimbit_image_size,nimbit_transparency_color" />
+
+<h3><?php echo $warning; ?></h3>
+<p class="submit">
+<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+</p>
+</form>
+</div>
+<?php
+}
+
+function nimbit_advanced()
+{
+  $nimbit_custom_css = get_option('nimbit_custom_css') or $nimbit_custom_css = nimbit_store_css();
+
+?>
+<div class="wrap">
+
+<h2 style="border-bottom:1px solid #CCCCCC;padding-bottom:0;"><a class="nav-tab" href="admin.php?page=nimbit-style">Nimbit Storefront Style</a><a class="nav-tab nav-tab-active" href="admin.php?page=nimbit-advanced">Advanced Style</a></h2>
+
+<form method="post" action="options.php" style="border-left:1px solid #cccccc;padding-left:10px;">
+<div style="padding:10px 10px 0px 10px;color:maroon;font-weight:bold;"><script>if (document.location.search && document.location.search.match(/updated/)) document.write('Your css has been saved.');</script>&nbsp;</div>
+<?php wp_nonce_field('update-options'); ?>
+
+<table class="form-table">
+
+<tr valign="top">
+<th scope="row">Custom CSS</th>
+</tr>
+<tr>
+<td><textarea name="nimbit_custom_css" style="width:94%;height:318px"><?php echo $nimbit_custom_css; ?></textarea></td>
+</tr>
+
+</table>
+
+<input type="hidden" name="action" value="update" />
+<input type="hidden" name="page_options" value="nimbit_custom_css" />
+
+<p class="submit">
+<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+</p>
+
+</form>
+</div>
+<?php
+}
+
 /* function : create main plugin page
 */
 
 function nimbit_plugin_page() {
 	print('<div class="wrap">');
-	print('<h2>Nimbit Options Page</h2>');
+	print('<h2 style="border-bottom:1px solid #CCCCCC;padding-bottom:0;"><a class="nav-tab nav-tab-active" href="admin.php?page=nimbit-admin">Nimbit Storefront Setup</a></h2>');
 
 	//called when a user wants to change Nimbit username and delete all Nimbit pages to start over
 	if(isset($_POST['reset'])){
@@ -156,28 +314,59 @@ function nimbit_plugin_page() {
 	if(isset($_POST['change'])){ //clear nimbit username
 		update_username_option();
 	}
+
+	echo '<div style="border-left:1px solid #CCCCCC;padding:10px;">';
 	
 	//if a nimbit username hasn't been entered yet 
 	//then display text box for user to enter it
 	if(get_option('nimbit_username')=='username'){?><div id="poststuff"> 
-	<p><strong>Once You are done you will have combined the smartest website software with the best music business platform.</strong></p>
+	<p><strong>Once you are done you will have combined the smartest website software with the best music business platform.</strong></p>
 	<div class="postbox"> 
 		    <h3 class="hndle"><span>Create Your Site Now</span></h3> 
 		    <div class="inside">
 		<form method="post" action="options.php"><?php wp_nonce_field('update-options'); 
-		?><table>
+		?>
+                <table>
 		<tr>
 			<td width="100" scope="row"><strong>Step 1</strong></td>
 		</tr>
+		<tr id="host1" style="visibility:collapse;display:none">
+		   <td>Enter the Nimbit Music Host:</td>
+		   <td><input name="nimbitmusic_host" type="text" id="nimbitmusic_host" value="<?php echo nimbitmusic_host(); ?>" style="width:200px" /></td>
+		</tr>
+		<tr id="host2" style="visibility:collapse;display:none">
+		   <td>Enter the Nimbit Dash Host:</td>
+		   <td><input name="dashboard_host" type="text" id="dashboard_host" value="<?php echo dashboard_host(); ?>" style="width:200px" /></td>
+		</tr>
 		<tr>
 			<td width="200">Enter Your Nimbit Username:</td>
-			<td width="200"><input name="nimbit_username" type="text" id="nimbit_username" value="<?php echo get_option('nimbit_username'); ?>" /></td>
+			<td width="210"><input name="nimbit_username" type="text" id="nimbit_username" value="<?php echo get_option('nimbit_username'); ?>" style="width:200px"/></td>
 
 			<input type="hidden" name="action" value="update" />
 			<input type="hidden" name="page_options" value="nimbit_username" />
 			<p>
 			<td width="300">
-			<input class='button-primary' type="submit" value="<?php _e('Continue') ?>" />
+			<input class='button-primary' type="submit" value="<?php _e('Continue') ?>" onclick="return handle_submit(event, this.form)"/>
+		        <script>
+
+function handle_submit(evt, form)
+{
+  if ((evt = evt || window.event || window.Event) && evt.shiftKey)
+  {
+    var s1 = document.getElementById('host1').style;
+    var s2 = document.getElementById('host2').style;
+
+    s1.display = s1.visibility = s2.display = s2.visibility = '';
+
+    var e = form.elements['page_options'];
+
+    if (!e.value.match(/nimbitmusic_host/)) e.value += ',nimbitmusic_host';
+    if (!e.value.match(  /dashboard_host/)) e.value += ',dashboard_host';
+
+    return false;
+  }
+}
+		        </script>
 			</td>
 			<td>
 			Sign up for a free Nimbit account <a href="http://www.nimbit.com/plans-pricing/?wpdash">here</a>.
@@ -203,15 +392,19 @@ function nimbit_plugin_page() {
 		</table><?php
 		//finds artist names associated with Nimbit username
 		$bandname = get_option('nimbit_username');
-		$jsonurl = 'http://members.nimbit.com/nrp/foldername.php?partner=myspace&username='.$bandname.'';
+		$jsonurl = 'http://'.nimbitmusic_host().'/nrp/foldername.php?partner=myspace&username='.$bandname.'';
 		$json = file_get_contents($jsonurl);
 		$jsonresult = json_decode($json, true);
 		$count = 0;
 		$artistname = array();
 		$dirname = array();
+		$skin = array();
+		$plan = array();
 		foreach ($jsonresult as $key => $value){
 			$artistname[$count] = $value['artist_name'];
 			$dirname[$count] = $value['dirname'];
+			$skin[$value['dirname']] = $value['skin'];
+			$plan[$value['dirname']] = $value['plan'];
 			$count++;
 		}
 		if($count > 0){ //if there are artists associated with this username then create drop down menu
@@ -227,12 +420,27 @@ function nimbit_plugin_page() {
 					?><option value="<?php print($dirname[$a]);?>"><?php print($artist); ?></option><?php
 				}
 				?></select></td>
-				<input type="hidden" name="action" value="update" />
-				<input type="hidden" name="page_options" value="nimbit_artist" />
-				<td><input class="button-primary" type="submit" value="<?php _e('continue') ?>" /></td></tr>
-				</p>
-				</tr>
-				
+				<td>
+				      <input type="hidden" name="action" value="update" />
+				      <input type="hidden" name="page_options" value="nimbit_artist,nimbit_skin,nimbit_plan" />
+				      <input type="hidden" name="nimbit_skin" />
+				      <input type="hidden" name="nimbit_plan" />
+				      <input class="button-primary" type="submit" value="<?php _e('continue') ?>" onclick="update_skin(this.form)"/>
+				      <script>
+
+var artist_skin = <?php echo json_encode($skin); ?>;
+var artist_plan = <?php echo json_encode($plan); ?>;
+
+function update_skin(form)
+{
+  var select  = form.elements['nimbit_artist'];
+  var dirname = select.options[select.selectedIndex].value;
+
+  form.elements['nimbit_skin'].value = window.artist_skin[dirname];
+  form.elements['nimbit_plan'].value = window.artist_plan[dirname];
+}
+				      </script>
+				      </td></tr>
 				</table>
 			</form>
 		</div>
@@ -242,14 +450,16 @@ function nimbit_plugin_page() {
 			print('</div></div></div><div id="poststuff"> 
 	<div class="postbox"> 
 		    <h3 class="hndle"><span>Sorry</span></h3> 
-		    <div class="inside"><p id="alert_no_artist" ><strong>There are no activated artists associated with this username.</strong></p><p> You can either sign into your Nimbit dashboard to activate these accounts <a href="http://members.nimbit.com/dashboard/">here</a> or change the username above.</p></div></div></div>');
+		    <div class="inside"><p id="alert_no_artist" ><strong>There are no activated artists associated with this username.</strong></p><p> You can either sign into your Nimbit dashboard to activate these accounts <a href="http://<?php echo dashboard_host(); ?>/dashboard/">here</a> or change the username above.</p></div></div></div>');
 		}
 		
 	}else{//once the user has selected an artist and clicks continue they are brought to the main page where they can select what pages they want to create
 		require('admin-page.php');
 			}
-		}
 	}
+
+	echo '</div>';
+}
 	
 
 /* resets nimbit_username option and nimbit_artist option
@@ -269,12 +479,15 @@ function update_username_option(){
    IF YOU WOULD LIKE TO CHANGE THESE TAGS LOGIN TO YOUR NIMBIT DASHBOARD
 */
 function nimbit_get_content($pagetitle){
+
+	if ($pagetitle == 'Store') return nimbit_store_content();
+
 	$bandname = get_option('nimbit_artist');
-	$photo = '<script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/photo/original/"></script>';
-	$bio = '<p><script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/profile"></script></p>';
-	$calendar = '<script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/calendar?nrt_mode=true&previous=-2&direction=1"></script>';
-	$news = '<script src="http://members.nimbit.com/tags/javascript/artists/'.$bandname.'/news"></script>';
-	$skin = '<div id="embed_parent">
+	$photo = '<script src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.$bandname.'/photo/original/"></script>';
+	$bio = '<p><script src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.$bandname.'/profile"></script></p>';
+	$calendar = '<script src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.$bandname.'/calendar?nrt_mode=true&previous=-2&direction=1"></script>';
+	$news = '<script src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.$bandname.'/news"></script>';
+	$skin = '!<div id="embed_parent">
  <script src="http://www.nimbitmusic.com/nrp/includes/javascript/flashembed.js"></script>
  <script>expandedStore(\'embed_parent\', \'http://www.nimbitmusic.com/nes/'.$bandname.'/stores/ES\', 600, 600);</script>
  <noscript>
@@ -284,14 +497,13 @@ function nimbit_get_content($pagetitle){
  </noscript>
 </div>';
 	$content = array();
-	$content['Store'] = $skin;
+	$content['Skin'] = $skin;
 	$content['Events'] = $calendar;
 	$content['Photos'] = '';
 	$content['Bio'] = $photo.$bio;
 	$content['News'] = $news;
 
-	$requested_content = $content[$pagetitle];
-	return $requested_content;
+	return nimbit_content_wrapper($pagetitle, $content[$pagetitle]);
 }
 
 //Nimbit Subscribe Widget
@@ -327,7 +539,7 @@ class nimbit_subscribe {
 		echo $args['before_title'] . $data['title'] . $args['after_title'];
 		$data = get_option('nimbit_artist');
 		echo '<p>Sign up for our email list:</p>';
-		echo '<script src="http://members.nimbit.com/tags/javascript/artists/'.$data.'/subscribe/"></script>';
+		echo '<script src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.$data.'/subscribe/"></script>';
 		echo $args['after_widget'];
 	}
 	function register(){
@@ -365,7 +577,7 @@ class nimbit_nextgig {
 		echo $args['before_widget'];
 		echo $args['before_title'] . $data['title'] . $args['after_title'];
 		$data = get_option('nimbit_artist');
-		echo '<script src="http://members.nimbit.com/tags/javascript/artists/'.$data.'/calendar?nrt_mode=true&previous=-2&upcoming=-1"></script>';
+		echo '<script src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.$data.'/calendar?nrt_mode=true&previous=-2&upcoming=-1"></script>';
 		echo $args['after_widget'];
 	}
 	function register(){
@@ -608,4 +820,7 @@ class nimbit_social {
 		register_widget_control('Nimbit Social Sites', array('nimbit_social', 'control'));
 	}
 }
+
+require_once 'fp-widget.php';
+
 ?>

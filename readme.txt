@@ -4,7 +4,7 @@ Donate link:
 Tags: music, nimbit, band, band sites, band websites, band store, store, sell, digital, music, sell digital music
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 
 Easily create a complete artist-band website with fan signup, gig listings, storefront and more...
 
@@ -88,3 +88,6 @@ Bug fixes & verbiage updates
 
 = 0.2.1 =
 Fixed foreground in transparent mode
+
+= 0.2.2 =
+Updated plugin description

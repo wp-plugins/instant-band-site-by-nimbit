@@ -60,14 +60,17 @@ function nimbit_store_css($includeCustom = false, $options = null)
 
   extract($options ? $options : nimbit_store_options());
 
-  $foreground = $nimbit_transparency_color == '#000000' ? '#ffffff' : '#000000';
-  $dropshadow = $nimbit_transparency_color == '#000000' ? '#cccccc' : '#333333';
+	if ($nimbit_transparency_color)
+	{
+		$foreground = $nimbit_transparency_color == '#000000' ? '#ffffff' : '#000000';
+		$dropshadow = $nimbit_transparency_color == '#000000' ? '#cccccc' : '#333333';
+	}
 
   if ($nimbit_transparency_color == '#000000')
   {
     $image = 'background:url("http://'.$host.'/images/configcart.png") no-repeat scroll right 3px transparent;';
   }
-  elseif ($nimbit_transparency_color == '#ffffff')
+  else
   {
     $image = 'background:url("http://'.$host.'/images/configcartBLK.png") no-repeat scroll right 3px transparent;';
   }

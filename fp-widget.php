@@ -4,24 +4,32 @@ add_action("widgets_init", array('nimbit_featured_product', 'register'));
 register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_featured_product', 'activate'));
 register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_featured_product', 'deactivate'));
 class nimbit_featured_product {
+
+  function url($url = '')
+	{
+		$url = trim($url);
+		$wpurl = get_bloginfo('wpurl');
+
+		// if a url is provided just return it
+		if ($url) if ($url != "$wpurl/") return $url;
+
+		// lookup the MyStore page_id first then look for the Skin Store
+		$page_id = floor(get_option('nimbit_page_ids_MyStore')) or $page_id = floor(get_option('nimbit_page_ids_Store'));
+
+		return "$wpurl/".($page_id ? "?page_id=$page_id" : '');
+	}
+
 	function activate(){
 		$data = array();
 		$cds = array();
 		$tickets = array();
 		$details = array();
-		$data = array('title'=>'Featured Product', 'select'=>'', 'height'=>'', 'url'=>get_bloginfo('wpurl').'/store', 'desc'=>'enter a subtitle here');
-		if( !get_option('nimbit_featured_product')){
-			add_option('nimbit_featured_product' , $data);
-			add_option('nimbit_all_cds', $cds);
-			add_option('nimbit_all_tickets', $tickets);
-			add_option('nimbit_all_events', $details);
-		}else{
-			update_option('nimbit_featured_product' , $data);
-			update_option('nimbit_all_cds' , $cds);
-			update_option('nimbit_all_tickets' , $tickets);
-			update_option('nimbit_all_events', $details);
-		}
-	
+		$data = array('title'=>'Featured Product', 'select'=>'', 'height'=>'', 'url'=>nimbit_featured_product::url(), 'desc'=>'enter a subtitle here');
+
+		set_option('nimbit_featured_product' , $data);
+		set_option('nimbit_all_cds', $cds);
+		set_option('nimbit_all_tickets', $tickets);
+		set_option('nimbit_all_events', $details);
 	}
 	function deactivate(){
 		delete_option('nimbit_featured_product');
@@ -36,95 +44,77 @@ class nimbit_featured_product {
 		$url1 = 'http://'.nimbitmusic_host().'/artistdata/';
 		$url1 .= $artist;
 		$url1 .= '/full_catalog/';
-		$xml1 = simplexml_load_file($url1);
-		$count = 0;
-		$product = $xml1->xpath('//response/RecordCompany/Artist/Catalog/Product');
-		$type = $xml1->xpath('//response/RecordCompany/Artist/Catalog/Product/Type');
-		$imageid = $xml1->xpath('//response/RecordCompany/Artist/Catalog/Product/ImageId');
-		$cd = $xml1->xpath('//response/RecordCompany/Artist/Catalog/Product/ProductName');
-		$ticket = $xml1->xpath('//response/RecordCompany/Artist/Catalog/Product/Ticket/EventId');
-		foreach($product as $r => $result){
-			if($type[$r]=='CD'){
-				$id = (string)$imageid[$r];
-				if($id == "" | $id == '0'){
-					$id = 'http://'.nimbitmusic_host().'/images/placeholder/product_photo.gif';
-				}else{
-					$id = 'http://'.nimbitmusic_host().'/images/db/large/'.$id.'.jpg';
-				}
-				$cds[(string)$cd[$r]] = $id;
-			}elseif($type[$r]=='Will Call Tickets'){
-				$id = (string)$imageid[$r];
-				if($id == ""){
-					$id = 'http://'.nimbitmusic_host().'/images/placeholder/ticket_photo.jpg';
-				}else{
-					$id = 'http://'.nimbitmusic_host().'/images/db/large/'.$id.'.jpg';
-				}
-				$tickets[(string)$ticket[$count]] = $id;
-				$count++;
-			}
-		}
+		$xml1 = @simplexml_load_file($url1); // @ sign prevents warnings from appearing in the widget settings if $artist is invalid
+
+		if (!is_object($xml1)) return; // in case $artist is invalid, don't block entire widgets page from rendering
+
 		$url2 = 'http://'.nimbitmusic_host().'/artistdata/'.$artist.'/calendar/';
-		$xml2 = simplexml_load_file($url2);
-		$count2 = 0;
-		$eventid = $xml2->xpath('//EventCalendar/Event/event_id');
-		$venue = $xml2->xpath('//EventCalendar/Event/venue');
-		$date = $xml2->xpath('//EventCalendar/Event/event_date');
-		$details = array();
-		$dates = $xml2->xpath('//EventCalendar/Event');
-		$test = array();
-		$count3 = 0;
-		foreach($eventid as $e){
-			$test[(string)$e] = array('venue'=> (string)$venue[$count3], 'date'=> (string)$date[$count3]);
-			$count3++;
-		}
+    $xml2 = simplexml_load_file($url2);
 
-		
-		foreach($tickets as $key=>$v){
-			foreach($test as $t=>$e){
-				if($key == $t){
-					$temp = array('venue' => (string)$e['venue'], 'date' => (string)$e['date'], 'image' => $v);
-					$details[(string)$t] = $temp;
-				}
+		$dates = array();
+
+		if (is_object($xml2))
+		{
+			$events = $xml2->xpath('//EventCalendar/Event');
+
+			if (is_array($events)) foreach ($events as $e)
+			{
+				$dates[(string)$e->event_id] = date('m/d/Y', strtotime((string)$e->event_date)).' at '.$e->venue;
 			}
-		
-		}
-		
-
-		update_option('nimbit_all_cds' , $cds);
-		update_option('nimbit_all_tickets' , $tickets);
-		update_option('nimbit_all_events', $details);
-		
-		
-		$tickets = get_option('nimbit_all_tickets');
-		$details = get_option('nimbit_all_events');
-		$cds = get_option('nimbit_all_cds');
-		
-		$selected = array();
-		foreach($tickets as $c=>$d){
-			$selected[$c] = '';
-		}
-		foreach($cds as $c=>$d){
-			$selected[$c] = '';
 		}
 
+		$products = $xml1->xpath('//response/RecordCompany/Artist/Catalog/Product');
+
+		if (is_array($products)) foreach ($products as $p)
+    {
+			$pid = floor((string)$p->ID);
+			$id  = floor((string)$p->ImageId);
+
+			if (preg_match('/Ticket/i', (string)$p->Type))
+			{
+				if ($id) $id = 'http://'.nimbitmusic_host().'/images/db/large/'.$id.'.jpg';
+				else     $id = 'http://'.nimbitmusic_host().'/images/placeholder/ticket_photo.jpg';
+
+				$tickets[$pid] = $id;
+				$names[$pid] = $dates[(string)$p->Ticket[0]->EventId] or $names[$pid] = 'Ticket';
+			}
+			else
+			{
+				if ($id) $id = 'http://'.nimbitmusic_host().'/images/db/large/'.$id.'.jpg';
+				else     $id = 'http://'.nimbitmusic_host().'/images/placeholder/product_photo.gif';
+
+				$cds[$pid] = $id;
+				$names[$pid] = $p->ProductName;
+			}
+		}
+
+		set_option('nimbit_all_cds' , $cds);
+		set_option('nimbit_all_tickets' , $tickets);
+		set_option('nimbit_all_names', $names);
+
+		$default = 0;
+		foreach ($cds     as $pid=>$src) if ($default) break; else $default = $pid;
+		foreach ($tickets as $pid=>$src) if ($default) break; else $default = $pid;
+		
 		$data = get_option('nimbit_featured_product');
+
+		if ($data['select']) {} else
+		{
+			$data['select'] = $default;
+			set_option('nimbit_featured_product', $data);
+		}
+
+		$selected = array($data['select']=>'selected');		
+
 		?><p>Title: <input type="text" name="nimbit_featured_product_title" value="<?php print $data['title']; ?>" /></p>
 		<p>Subtitle: <input type="text" name="nimbit_featured_product_subtitle" value="<?php print $data['desc']; ?>" /></p>
+    <p>Choose From Your Nimbit Catalog: <select size="1" name="nimbit_featured_product_select" style="width:224px">
 		<?php
-		
 
-		if($data['select'] != ""){
-			$selected[$data['select']] = 'selected';
-		}
-		?><p>Choose From Your Nimbit Catalog: <select size="1" name="nimbit_featured_product_select"><?php
-												foreach($cds as $c=>$d){
-													print('<option '.$selected[$c].' value="'.$c.'">'.$c.'</option>');
-												}
-		
-												foreach($details as $d => $det){
-													print '<option '.$selected[$d].' value="'.$d.'">'.$det['venue'].'</option>';
-												}
-												?></select>
+    foreach ($cds     as $pid=>$src) echo '<option '.$selected[$pid].' value="'.$pid.'">'.$names[$pid].'</option>';
+		foreach ($tickets as $pid=>$src) echo '<option '.$selected[$pid].' value="'.$pid.'">'.$names[$pid].'</option>';
+
+		?></select>
 		</p>
 		<br />
 		<p>Square Image Dimensions: <br /><?php
@@ -142,49 +132,41 @@ class nimbit_featured_product {
 								</select> (px)
 		</p>
 		<br />
-		<p>Storefront URL: <br /> <input size="40" type="text" name="nimbit_featured_product_url" value="<?php print $data['url']; ?>" />
+		<p>Storefront URL: <br /> <input size="40" type="text" name="nimbit_featured_product_url" value="<?php print nimbit_featured_product::url($data['url']); ?>" style="width:224px" />
 		<span style="font-size: xx-small;">Paste in the URL of your Nimbit storefront</span></p>
 		<?php
 		if(isset($_POST['nimbit_featured_product_title'])){
 			$data['title'] = attribute_escape($_POST['nimbit_featured_product_title']);
-			update_option('nimbit_featured_product', $data);
+			set_option('nimbit_featured_product', $data);
 		}if(isset($_POST['nimbit_featured_product_subtitle'])){
 			$data['desc'] = (string)attribute_escape($_POST['nimbit_featured_product_subtitle']);
-			update_option('nimbit_featured_product', $data);
+			set_option('nimbit_featured_product', $data);
 		}
 		if (isset($_POST['nimbit_featured_product_select'])){
 			$data['select'] = (string)attribute_escape($_POST['nimbit_featured_product_select']);
-			update_option('nimbit_featured_product', $data);
+			set_option('nimbit_featured_product', $data);
 		}if (isset($_POST['nimbit_featured_product_height'])){
 			$data['height'] = attribute_escape($_POST['nimbit_featured_product_height']);
-			update_option('nimbit_featured_product', $data);
+			set_option('nimbit_featured_product', $data);
 		}if (isset($_POST['nimbit_featured_product_url'])){
 			$data['url'] = attribute_escape($_POST['nimbit_featured_product_url']);
-			update_option('nimbit_featured_product', $data);
+			set_option('nimbit_featured_product', $data);
 		}	
 	}
-	function widget($args){
-	$artist = get_option('nimbit_artist');
-	$data = get_option('nimbit_featured_product');
-	$cds = get_option('nimbit_all_cds');
-	$details = get_option('nimbit_all_events');
-	$tickets = get_option('nimbit_all_tickets');
-	echo $args['before_widget'];
-    echo $args['before_title'] . $data['title'] . $args['after_title'];
-	if($cds[$data['select']]==""){
-		echo '<p style="font-size: medium;"><strong>';
+	function widget($args)
+  {
+		$data = get_option('nimbit_featured_product');
+		$cds = get_option('nimbit_all_cds');
+		$names = get_option('nimbit_all_names');
+		$tickets = get_option('nimbit_all_tickets');
+
+		$src = $cds[$data['select']] or $src = $tickets[$data['select']] or $src = 'http://'.nimbitmusic_host().'/images/placeholder/product_photo.gif';
+
+		echo $args['before_widget'];
+		echo $args['before_title'] . $data['title'] . $args['after_title'];
 		echo $data['desc'];
-		echo '</strong></p>';
-		echo ("<a href='".$data['url']."' <img src='".$details[$data['select']]['image']."' width=\"".$data['height']."\" height=\"".$data['height']."\" /></a><br />");
-		echo '<br />';
-		echo '<p style="font-size: medium;"><strong>';
-		echo date('M d, Y',strtotime($details[$data['select']]['date']));
-		echo '</strong></p>';
-	}else{
-		echo $data['desc'];
-		echo ("<a href='".$data['url']."' <img src=\"".$cds[$data['select']]."\" width=\"".$data['height']."\" height=\"".$data['height']."\" /></a><br />");
-	}
-    echo $args['after_widget'];
+		echo "<br/><br/><a href='".nimbit_featured_product::url($data['url'])."' <img src=\"$src\" width=\"".$data['height']."\" height=\"".$data['height']."\" /></a><br />";
+		echo $args['after_widget'];
 	}
 	function register(){
 		register_sidebar_widget('Nimbit Featured Product', array('nimbit_featured_product', 'widget'));

@@ -1,6 +1,6 @@
 <?php require_once 'common.php';?>
 
-<p><strong>The Nimbit Site Generator Plugin can set you up with a site for your music in 4 easy steps.  Once You are done you will have combined the smartest website software with the best music business platform.</strong></p>
+<p><strong>With the Nimbit Instant Band Site plug-in, it's easier than ever to create and maintain and artist website that provides the perfect showcase and storefront to connect with fans.</strong></p>
 		<p><strong style="color: green;">Your Pages</strong></p>
 		<?php	
 		$arguments = array();
@@ -23,14 +23,14 @@
 				}
 			}
 			print('</table>');
+?><p><strong>NOTE:</strong>
+ Nimbit installed pages and widgets get their content automatically from your Nimbit account.&nbsp;
+ If you have your Nimbit account open in another browser window, the edit links above will take you to the right pages to edit content.&nbsp;
+ <a href="http://www.nimbit.com" target="_blank">Click here</a> to sign up for a Nimbit account, including NimbitFree.
+</p>
+<?php
 		}else{
-			?><p>You have not set up any pages with your Nimbit content yet.  Click <a href='admin.php?page=nimbit-admin'>here</a> to get started.<?php
+			?><p>You have not set up any pages with your Nimbit content yet.  Click <a href='admin.php?page=nimbit-admin'>here</a> to get started.</p><?php
 		}
 		?>
-		<p><strong>NOTE:</strong> "edit content" links take you to your Nimbit account to update information. You cannot edit your Nimbit content from within Wordpress.</p>
-		<table>
-		<tr>
-		<td width="570"></td>
-		<td><a href="http://www.nimbit.com" class="button-primary" style="background: #00CC00; outline: #00CC00;">Log into Nimbit</a></td>
-		</tr>
-		</table>
+		<a href="http://www.nimbit.com/instant-band-site-login/" class="button-primary" style="background: #00CC00; outline: #00CC00;">Log into Nimbit</a>

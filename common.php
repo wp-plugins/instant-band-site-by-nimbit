@@ -1,9 +1,32 @@
 <?php
 
-function default_option($key, $default_value)
+// wrapper for add_option & update_option functions that keeps
+// track of option names used so they can be easily deleted.
+//
+function set_option($name, $value, $autoload = null)
 {
-  strlen(get_option($key)) or update_option($key, $default_value);
-  return get_option($key);
+	if (is_null($autoload)) update_option($name, $value); else
+	{
+		add_option($name, $value, $deprecated, $autoload);
+	}
+
+	if (!in_array($name, $names = explode(',', get_option('nimbit_option_names'))))
+	{
+		$names[] = $name;
+
+		update_option('nimbit_option_names', implode(',', $names));
+	}
+}
+
+function default_option($name, $default_value)
+{
+  strlen(get_option($name)) or update_option($name, $default_value);
+  return get_option($name);
+}
+
+function delete_options()
+{
+	foreach (explode(',', get_option('nimbit_option_names')) as $name) delete_option($name);
 }
 
 // used to allow plugin to point to dev and qa
@@ -22,13 +45,13 @@ function nimbitmusic_host()
 // return a hash of those options pertinent to the installed store's
 // configuration or, optionally, just the names of those options
 //
-function nimbit_store_options($keysOnly = false)
+function nimbit_store_options($namesOnly = false)
 {
   $options = array('nimbit_image_size'=>'', 'nimbit_transparency_color'=>'', 'nimbit_custom_css'=>'');
 
-  if (!$keysOnly) foreach ($options as $k=>$v) $options[$k] = get_option($k);
+  if (!$namesOnly) foreach ($options as $k=>$v) $options[$k] = get_option($k);
 
-  return $keysOnly ? array_keys($options) : $options;
+  return $namesOnly ? array_keys($options) : $options;
 }
 
 function nimbit_store_css($includeCustom = false, $options = null)
@@ -72,11 +95,7 @@ a.button,
 }
 
 .yui-panel,
-.nrt_store .transparency,
-#nhs_wrapper .product .lyrics,
-#nhs_wrapper .product .descriptionBtn,
-#nhs_wrapper .product .description,
-#nhs_wrapper .product .descPadding
+.nrt_store .transparency
 {
   background-color:$nimbit_transparency_color;
 }
@@ -124,7 +143,7 @@ function nimbit_store_content()
   // note: mustn't have carraige returns in css as wordpress replaces them with <p> tags that are invalid in css
   // see: http://wordpress.org/support/topic/unwanted-ltpgt-tags-added-to-pages
   //
-  return nimbit_content_wrapper('Store', $script.'<style>'.str_replace("\n", ' ', nimbit_store_css(true, $options)).'</style>');
+  return nimbit_content_wrapper('MyStore', $script.'<style>'.str_replace("\n", ' ', nimbit_store_css(true, $options)).'</style>');
 }
 
 function nimbit_update_post($title)

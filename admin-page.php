@@ -15,7 +15,7 @@
 										<td><strong>Step 1:</strong>  Your Nimbit Username is <strong><?php print(get_option('nimbit_username')); ?></strong>.<p></td>
 									</tr>
 									<tr>
-										<td><strong>Step 2:</strong>  Your Nimbit Artist is: <strong><?php print(get_option('nimbit_artist')); ?></strong>.</p></td>
+										<td><strong>Step 2:</strong>  Your Nimbit Artist is: <strong><?php print(get_option('nimbit_name')); ?></strong>.</p></td>
 									</tr>
 									<tr>
 										<td><strong>Step 3:</strong>  Select which pages you would like to create:</p></td>
@@ -35,7 +35,7 @@
 									if(get_option('nimbit_pages')=='somepages'){
 									//create the pages that were checked
 										$pages = get_option('nimbit_page');
-										foreach($pages as $page){
+										if (is_array($pages)) foreach($pages as $page){
 											$this_content = nimbit_get_content($page);
 											create_given_page($page, $this_content);
 											
@@ -88,36 +88,36 @@
 
 foreach ($checked as $k=>$v) if ($v == 'checked') ${"disabled$k"} = 'disabled'; // assigns 'disabled' to variables of the form $disabled<pagename>, for example, $disabledStore
 
-$linkStore  = ' <a href="http://'.dashboard_host().'/dashboard/main/store_appearance.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['Store'].'">delete</a>';
-$linkSkin   = ' <a href="http://'.dashboard_host().'/dashboard/main/store_appearance.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['Skin'].'">delete</a>';
-$linkEvents = ' <a href="http://'.dashboard_host().'/dashboard/main/events.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['Events'].'"> delete</a>';
-$linkPhotos = ' <a href="admin.php?page=nimbit-admin&del='.$id['Photos'].'">delete</a>';
-$linkBio    = ' <a href="http://'.dashboard_host().'/dashboard/main/basicinfo.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['Bio'].'">delete</a>';
-$linkNews   = ' <a href="http://'.dashboard_host().'/dashboard/main/news.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['News'].'">delete</a>';
+$linkMyStore = ' <a href="http://'.dashboard_host().'/dashboard/main/store_appearance.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['MyStore'].'">delete</a>';
+$linkStore   = ' <a href="http://'.dashboard_host().'/dashboard/main/store_appearance.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['Store'].'">delete</a>';
+$linkEvents  = ' <a href="http://'.dashboard_host().'/dashboard/main/events.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['Events'].'"> delete</a>';
+$linkPhotos  = ' <a href="admin.php?page=nimbit-admin&del='.$id['Photos'].'">delete</a>';
+$linkBio     = ' <a href="http://'.dashboard_host().'/dashboard/main/basicinfo.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['Bio'].'">delete</a>';
+$linkNews    = ' <a href="http://'.dashboard_host().'/dashboard/main/news.php">edit content</a> <a href="admin.php?page=nimbit-admin&del='.$id['News'].'">delete</a>';
 ?>
 
 <blockquote>
-  <p><input type="checkbox" name="nimbit_page[]" checked value="Store"  <?php echo $disabledStore;  ?>/> Store Front <?php if ($disabledStore)  echo $linkStore;  ?></p>
+  <p><input type="checkbox" name="nimbit_page[]" checked value="MyStore" <?php echo $disabledMyStore; ?>/> Store Front - Nimbit MyStore<?php if ($disabledMyStore) echo $linkMyStore; ?></p>
 
 <?php if (get_option('nimbit_skin')) { ?>
 
-  <p><input type="checkbox" name="nimbit_page[]" checked value="Skin"   <?php echo $disabledSkin;  ?>/>  Nimbit Skin <?php if ($disabledSkin)   echo $linkSkin;   ?></p>
+  <p><input type="checkbox" name="nimbit_page[]" checked value="Store"   <?php echo $disabledStore;   ?>/> Store Front - Nimbit Skin<?php if ($disabledStore) echo $linkStore; ?></p>
 <?php } ?>
 
-  <p><input type="checkbox" name="nimbit_page[]" checked value="Events" <?php echo $disabledEvents; ?>/> Events      <?php if ($disabledEvents) echo $linkEvents; ?></p>
-  <p><input type="checkbox" name="nimbit_page[]" checked value="Photos" <?php echo $disabledPhotos; ?>/> Photos      <?php if ($disabledPhotos) echo $linkPhotos; ?></p>
-  <p><input type="checkbox" name="nimbit_page[]" checked value="Bio"    <?php echo $disabledBio;    ?>/> Bio         <?php if ($disabledBio)    echo $linkBio;    ?></p>
+  <p><input type="checkbox" name="nimbit_page[]" checked value="Events"  <?php echo $disabledEvents;  ?>/> Events      <?php if ($disabledEvents) echo $linkEvents; ?></p>
+  <p><input type="checkbox" name="nimbit_page[]" checked value="Photos"  <?php echo $disabledPhotos;  ?>/> Photos      <?php if ($disabledPhotos) echo $linkPhotos; ?></p>
+  <p><input type="checkbox" name="nimbit_page[]" checked value="Bio"     <?php echo $disabledBio;     ?>/> Bio         <?php if ($disabledBio)    echo $linkBio;    ?></p>
 
 <?php if (get_option('nimbit_plan') == 'platinum') { ?>
 
-  <p><input type="checkbox" name="nimbit_page[]" checked value="News"   <?php echo $disabledNews;   ?>/> News        <?php if ($disabledNews)   echo $linkNews;   ?></p>
+  <p><input type="checkbox" name="nimbit_page[]" checked value="News"    <?php echo $disabledNews;    ?>/> News        <?php if ($disabledNews)   echo $linkNews;   ?></p>
 <?php } ?>
 </blockquote>
 								<input type="hidden" name="action" value="update" />
 								<input type="hidden" name="nimbit_pages" value="somepages" />
 								<input type="hidden" name="page_options" value="nimbit_pages,nimbit_page" />
 								</td></tr></table><table>
-								<tr><td width="170"><p><input class="button-primary" type="submit" value="<?php _e('Generate Pages') ?>" /></p>
+								<tr><td width="170"><p><input class="button-primary" type="submit" value="<?php _e('Create Selected Pages') ?>" /></p>
 								</td><td></form>
 								<!--clicking reset resets the nimbit username and artist in the DB and deletes all Nimbit pages-->
 								<form action='admin.php?page=nimbit-admin' method='post'>
@@ -127,18 +127,24 @@ $linkNews   = ' <a href="http://'.dashboard_host().'/dashboard/main/news.php">ed
 								</td></tr>
 								</table>
 								<br/>
-								<strong>Step 4: </strong>  The Following Nimbit Widgets Were Installed:
+                <strong>Step 4: </strong> &nbsp;Drag new Nimbit widgets into your sidebar
 								<blockquote>
 								  <p><strong>Social Sites</strong> Widget</p>
-								  <p><strong>Promotion Code</strong> Widget (Indie and Pro Accounts only) <a href="http://<?php echo dashboard_host() ;?>/dashboard/main/promo_offers.php">edit content</a></p>
+								  <p><strong>Promotion Code</strong> Widget (Indie and Pro Accounts only) <a href="http://<?php echo dashboard_host() ;?>/dashboard/main/promo_offers.php">add/edit promo codes</a></p>
 								  <p><strong>Standard Email Form</strong> Widget</p>
-								  <p><strong>Next Gig</strong> Widget <a href="http://<?php echo dashboard_host() ;?>/dashboard/main/events.php">edit content</a></p>
+								  <p><strong>Next Gig</strong> Widget <a href="http://<?php echo dashboard_host() ;?>/dashboard/main/events.php">add/edit gigs</a></p>
 								  <p><strong>Facebook Like</strong> Widget</p>
+								  <p><strong>Music Player</strong> (Plays all samples from your Nimbit Catalog)</p>
+							    <p><strong>Featured Product</strong> Widget</p>
 								</blockquote>
-								<a class="button-primary" href="widgets.php">Put Widgets into Sidebar</a>
-								<br/><br/><br/><br/>
-								<a href="http://www.nimbit.com" class="button" style="background: #00CC00; outline: #00CC00; color: white; font-weight: bold;">Log into Nimbit</a>
-								<strong>Note: </strong>You can only edit your Nimbit content in your Nimbit dashboard.
+								<a class="button-primary" href="widgets.php">Install Sidebar Widgets</a>
+								<br/><br/>
+								<p><strong>How to edit Nimbit content:</strong></p><p>
+ Nimbit installed pages and widgets get their content automatically from your Nimbit account.&nbsp;
+ If you have your Nimbit account open in another browser window, the edit links above will take you to the right pages to edit content.&nbsp;
+ <a href="http://www.nimbit.com" target="_blank">Click here</a> to sign up for a Nimbit account, including NimbitFree.
+								<br/><br/>
+                <a href="http://www.nimbit.com/instant-band-site-login/" class="button-primary" style="background: #00CC00; outline: #00CC00;">Log into Nimbit</a>
 								<br/><br/>
 							</div> 
 							</div> 

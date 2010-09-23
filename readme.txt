@@ -10,18 +10,35 @@ Easily create a complete artist-band website with fan signup, gig listings, stor
 
 == Description ==
 
-Nimbit is the direct to fan platform that gives artists and their teams the tools they need to create, nurture and monetize a supportive fan base.
-With this plugin, it's easier than ever to create a music website for an artist or band. This plugin automatically connects a Nimbit artist account to a WordPress site.  By simply entering your Nimbit username, five pages are instantly created to provide the most popular content demanded by online music fans.  This instant music "web presence" includes: your event calendar, bio, a storefront to purchase and listen to music, and a page for your photo gallery. These pages are automatically populated and updated from your Nimbit artist account. Whenever you update your Nimbit profile your website is automatically updated, offering an incredibly easy way to manage your website after its creation.
+Nimbit is the industry’s premier direct-to-fan platform for today’s music business. With this the free Instant Band Site plug-in, it's easier than ever for artists and bands to create and maintain a professional web presence that provides the perfect showcase and storefronts to take their music and careers direct-to-fan. 
+This plug-in links WordPress to a Nimbit account (<a href="http://www.nimbit.com/plans-pricing/">sign up here - free options available</a>) to make web site creation, maintenance and updates a breeze. 
 
-Your artist site can contain multiple fan capture tools as sidebar widgets to help you expand and engage your fan base. Our Email Signup, and promomtional code widgets will allow fans to easily interact with you in a way that will encourage further interaction with your band. You can connect your website to the most popular social sites (like Facebook) in one step with our social site sidebar widget. 
+Setting up a website with Instant Band Site is incredibly easy:
 
-Yes, it's that easy, Nimbit takes care of the hard stuff. You don't need to pay someone else to create your website or spend hours coding it yourself, and you won't have to worry about copying and pasting code into places that might not end up working; we do it all for you! Just provide your Nimbit username and this nifty plug-in will do the rest. 
+<ol>
+<li> Install the Instant Band Site plug-in to WordPress </li>
+<li> Provide a Nimbit user name and password </li>
+<li> Select website features to post </li>
+<li> Choose one of Nimbit’s free WordPress templates or from thousands of others </li>  
+<li> Hit publish and the new website is instantly generated </li>
+</ol>
 
-You will need a Nimbit account to activate and start using this plug-in (you can get a free one <a href="http://www.nimbit.com/plans-pricing/?wpdesc1">here</a>). You can set up your artist content (music, photos, merchandise, etc.) with Nimbit either before or after you use this plugin. Once your artist content is in your Nimbit account your site will be populated with it.
+By simply entering your Nimbit User Name, Instant Band Site Provides 
 
-Although this plug-in will work with most WordPress themes, to make this plug-in more effective Nimbit also has FREE artist/band themes created by a professional designer who has worked with many top bands.  You can download these FREE themes <a href="http://www.nimbit.com/instant-band-site/">here</a>. These themes are designed to give you a simple, quick customized website to get you an instant web presence.
+<ul>
+<li> A custom website with artist branding </li>
+<li> Full storefront to sell music (digital & CD), merchandise, & e-tickets </li>
+<li> Artist bio, blog, news, and gig calendar </li>
+<li> Email list sign up and promo code redemption </li>
+<li> An online music player </li>
+<li> Social network connection with Facebook, Twitter, etc. </li>
+<li> Integration with photo galleries and other WordPress add-ons </li>
+<li> More – <a href="http://www.nimbit.com/instant-band-site/">Click here to get more information and watch the videos</a> </li>
+</ul>
 
-You can learn more <a href="http://www.nimbit.com/instant-band-site/">here</a>.
+You can set up your artist content (music, upcoming gigs, merchandise, etc.) with Nimbit either before or after you use this plug-in. Once your artist content is entered in your Nimbit account your site will be populated with it, along with your Nimbit storefronts on Facebook and Myspace.  
+
+Although this plug-in will work with most WordPress themes, to make this plug-in more effective Nimbit also has FREE artist/band themes created by a professional designer who has worked with many top bands. You can download these FREE themes here. These themes are designed to give you a simple, quick customized website to get you an instant web presence.
 
 == Installation ==
 
@@ -62,6 +79,34 @@ You can view step-by-step directions on how to use this plugin <a href="http://n
 
 = 0.1 =
 * This is the first version of this plugin.
+
+= 0.1.5 =
+This version makes some minor changes to the Nimbit Options Page
+
+= 0.1.6 =
+This updated version of the plugin fixes the Promo Redemption Sidebar Widget.
+
+= 0.1.7 =
+This newest version of the plugin adds the Nimbit MyStore for Wordpress.
+
+= 0.1.8 =
+Renamed nimbit_style function to avoid conflict with one of the same name used in some Nimbit Wordpress themes.
+
+= 0.1.9 =
+Renamed nimbit-style menu entry to avoid conflict with one of the same name used in some Nimbit Wordpress themes.
+
+= 0.2.0 =
+Bug fixes & verbiage updates
+
+= 0.2.1 =
+Fixed foreground in transparent mode
+
+= 0.2.2 =
+Updated plugin description
+
+= 0.2.3 =
+Updated cart image for better appearance in transparent mode
+
 
 == Upgrade Notice ==
 

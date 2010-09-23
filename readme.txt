@@ -10,7 +10,7 @@ Easily create a complete artist-band website with fan signup, gig listings, stor
 
 == Description ==
 
-Nimbit is the industry’s premier direct-to-fan platform for today’s music business. With this the free Instant Band Site plug-in, it's easier than ever for artists and bands to create and maintain a professional web presence that provides the perfect showcase and storefronts to take their music and careers direct-to-fan. 
+Nimbit is the industry's premier direct-to-fan platform for today's music business. With this the free Instant Band Site plug-in, it's easier than ever for artists and bands to create and maintain a professional web presence that provides the perfect showcase and storefronts to take their music and careers direct-to-fan. 
 This plug-in links WordPress to a Nimbit account (<a href="http://www.nimbit.com/plans-pricing/">sign up here - free options available</a>) to make web site creation, maintenance and updates a breeze. 
 
 Setting up a website with Instant Band Site is incredibly easy:
@@ -19,7 +19,7 @@ Setting up a website with Instant Band Site is incredibly easy:
 <li> Install the Instant Band Site plug-in to WordPress </li>
 <li> Provide a Nimbit user name and password </li>
 <li> Select website features to post </li>
-<li> Choose one of Nimbit’s free WordPress templates or from thousands of others </li>  
+<li> Choose one of Nimbit's free WordPress templates or from thousands of others </li>  
 <li> Hit publish and the new website is instantly generated </li>
 </ol>
 
@@ -33,7 +33,7 @@ By simply entering your Nimbit User Name, Instant Band Site Provides
 <li> An online music player </li>
 <li> Social network connection with Facebook, Twitter, etc. </li>
 <li> Integration with photo galleries and other WordPress add-ons </li>
-<li> More – <a href="http://www.nimbit.com/instant-band-site/">Click here to get more information and watch the videos</a> </li>
+<li> More! <a href="http://www.nimbit.com/instant-band-site/">Click here to get more information and watch the videos</a> </li>
 </ul>
 
 You can set up your artist content (music, upcoming gigs, merchandise, etc.) with Nimbit either before or after you use this plug-in. Once your artist content is entered in your Nimbit account your site will be populated with it, along with your Nimbit storefronts on Facebook and Myspace.  

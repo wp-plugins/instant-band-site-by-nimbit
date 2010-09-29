@@ -3,7 +3,7 @@
  Plugin Name: Instant Band Site by Nimbit
  Plugin URI: http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/
  Description: With the Nimbit Instant Band Site plug-in, it's easier than ever to create and maintain and artist website that provides the perfect showcase and storefront to connect with fans.
- Version: 0.2.3
+ Version: 0.2.4
  Author: Nimbit
  Author URI:
  License: GPL2
@@ -386,7 +386,7 @@ function handle_submit(evt, form)
 		//finds artist names associated with Nimbit username
 		$bandname = get_option('nimbit_username');
 		$jsonurl = 'http://'.nimbitmusic_host().'/nrp/foldername.php?partner=myspace&username='.$bandname.'';
-		$json = file_get_contents($jsonurl);
+		$json = nimbit_fetch($jsonurl);
 		$jsonresult = json_decode($json, true);
 		$count = 0;
 		$artistname = array();
@@ -447,7 +447,7 @@ function update_skin(form)
 			print('</div></div></div><div id="poststuff"> 
 	<div class="postbox"> 
 		    <h3 class="hndle"><span>Sorry</span></h3> 
-		    <div class="inside"><p id="alert_no_artist" ><strong>There are no activated artists associated with this username.</strong></p><p> You can either sign into your Nimbit dashboard to activate these accounts <a href="http://<?php echo dashboard_host(); ?>/dashboard/">here</a> or change the username above.</p></div></div></div>');
+		    <div class="inside"><p id="alert_no_artist" ><strong>There are no activated artists associated with this username.</strong></p><p> You can either sign into your Nimbit dashboard to activate these accounts <a target="_blank" href="http://'.dashboard_host().'/dashboard/">here</a> or change the username above.</p></div></div></div>');
 		}
 		
 	}else{//once the user has selected an artist and clicks continue they are brought to the main page where they can select what pages they want to create
@@ -672,7 +672,7 @@ class nimbit_player {
 		$artist = get_option('nimbit_artist');
 		$songs = '';
 		$url = 'http://'.nimbitmusic_host().'/artistdata/'.$artist.'/stores/PS/';
-		$xml = simplexml_load_file($url);
+		$xml = simplexml_load_string(nimbit_fetch($url));
 		$count = 0;
 		$resulttwo = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/Name');
 		$resultthree = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/SampleFile');

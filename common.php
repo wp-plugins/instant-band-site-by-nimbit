@@ -162,4 +162,16 @@ function nimbit_update_post($title)
   }
 }
 
+function nimbit_fetch($url)
+{
+  if (ini_get('allow_url_fopen') == '1') return file_get_contents($url); else
+  {
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($curl);
+    curl_close($curl);
+    return $data;
+  }
+}
+
 ?>

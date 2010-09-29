@@ -44,12 +44,12 @@ class nimbit_featured_product {
 		$url1 = 'http://'.nimbitmusic_host().'/artistdata/';
 		$url1 .= $artist;
 		$url1 .= '/full_catalog/';
-		$xml1 = @simplexml_load_file($url1); // @ sign prevents warnings from appearing in the widget settings if $artist is invalid
+		$xml1 = @simplexml_load_string(nimbit_fetch($url1)); // @ sign prevents warnings from appearing in the widget settings if $artist is invalid
 
 		if (!is_object($xml1)) return; // in case $artist is invalid, don't block entire widgets page from rendering
 
 		$url2 = 'http://'.nimbitmusic_host().'/artistdata/'.$artist.'/calendar/';
-    $xml2 = simplexml_load_file($url2);
+                $xml2 = @simplexml_load_string(nimbit_fetch($url2));
 
 		$dates = array();
 

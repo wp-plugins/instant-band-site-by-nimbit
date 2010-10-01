@@ -107,6 +107,9 @@ Updated plugin description
 = 0.2.3 =
 Updated cart image for better appearance in transparent mode
 
+= 0.2.4 =
+Use curl on hosts where file_get_contents will not work because the allow_url_fopen setting is disabled.
+
 
 == Upgrade Notice ==
 
@@ -139,3 +142,6 @@ Updated plugin description
 
 = 0.2.3 =
 Updated cart image for better appearance in transparent mode
+
+= 0.2.4 =
+Use curl on hosts where file_get_contents will not work because the allow_url_fopen setting is disabled.

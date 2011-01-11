@@ -4,7 +4,7 @@ Donate link:
 Tags: music, nimbit, band, band sites, band websites, band store, store, sell, digital, music, sell digital music
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 0.2.4
+Stable tag: 0.2.5
 
 Easily create a complete artist-band website with fan signup, gig listings, storefront and more...
 
@@ -71,14 +71,14 @@ You can view step-by-step directions on how to use this plugin <a href="http://n
 
 == Changelog ==
 
-= 0.1.6 =
-* This updated version of the plugin fixes the Promo Redemption Sidebar Widget.
-
 = 0.1.4 =
 * This updated version of the plugin fixes a bug within the plugin.
 
 = 0.1 =
 * This is the first version of this plugin.
+
+= 0.1.4 =
+* This updated version of the plugin fixes a bug within the plugin.
 
 = 0.1.5 =
 This version makes some minor changes to the Nimbit Options Page
@@ -110,6 +110,8 @@ Updated cart image for better appearance in transparent mode
 = 0.2.4 =
 Use curl on hosts where file_get_contents will not work because the allow_url_fopen setting is disabled.
 
+= 0.2.5 =
+Featured Product widget supports catalogs with no products.  Enhancements for customizing Email Signup and Promo Code widgets.  New XSPF player widget replaces Streampad player widget.
 
 == Upgrade Notice ==
 
@@ -145,3 +147,6 @@ Updated cart image for better appearance in transparent mode
 
 = 0.2.4 =
 Use curl on hosts where file_get_contents will not work because the allow_url_fopen setting is disabled.
+
+= 0.2.5 =
+Featured Product widget supports catalogs with no products.  Enhancements for customizing Email Signup and Promo Code widgets.  New XSPF player widget replaces Streampad player widget.

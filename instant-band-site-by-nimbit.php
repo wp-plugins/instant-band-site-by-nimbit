@@ -3,7 +3,7 @@
  Plugin Name: Instant Band Site by Nimbit
  Plugin URI: http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/
  Description: With the Nimbit Instant Band Site plug-in, it's easier than ever to create and maintain and artist website that provides the perfect showcase and storefront to connect with fans.
- Version: 0.2.4
+ Version: 0.2.5
  Author: Nimbit
  Author URI:
  License: GPL2
@@ -510,7 +510,7 @@ register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbi
 register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_subscribe', 'deactivate'));
 class nimbit_subscribe {
 	function activate(){
-		set_option('nimbit_subscribe', array('title'=>'Email Signup'));
+		set_option('nimbit_subscribe', array('title'=>'Email Signup','subtitle'=>'enter a subtitle here'));
 	}
 	function deactivate(){
 		delete_option('nimbit_subscribe');
@@ -518,20 +518,51 @@ class nimbit_subscribe {
 	
 	function control(){
 	$data = get_option('nimbit_subscribe');
-	?><p>Title: <input name="nimbit_subscribe_title" type="text" value="<?php print $data['title']; ?>" /></p><?php
+	?><p>Title: <input name="nimbit_subscribe_title" type="text" value="<?php print $data['title']; ?>" /></p>
+	  <p>Subtitle: <input name="nimbit_subscribe_subtitle" type="text" size="25" value="<?php print $data['subtitle']; ?>" /></p><?php
 		if (isset($_POST['nimbit_subscribe_title'])){
 			$data['title'] = attribute_escape($_POST['nimbit_subscribe_title']);
 			set_option('nimbit_subscribe', $data);
+		}if (isset($_POST['nimbit_subscribe_subtitle'])){
+			$data['subtitle'] = attribute_escape($_POST['nimbit_subscribe_subtitle']);
+			set_option('nimbit_subscribe', $data);
 		}
+
 	}
 	
 	function widget($args){
 		$data = get_option('nimbit_subscribe');
+	$username = get_option('nimbit_username');
+	$dirname = get_option('nimbit_artist');
+	$jsonurl = 'http://'.nimbitmusic_host().'/nrp/foldername.php?partner=myspace&username='.$username.'';
+	$json = nimbit_fetch($jsonurl);
+	$jsonresult = json_decode($json, true);
+	$id;
+	foreach ($jsonresult as $key => $value){
+		if($value[dirname]==$dirname){
+			$id = $value['artist_id'];
+		}	
+	}
 		echo $args['before_widget'];
 		echo $args['before_title'] . $data['title'] . $args['after_title'];
-		$data = get_option('nimbit_artist');
-		echo '<p>Sign up for our email list:</p>';
-		echo '<script src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.$data.'/subscribe/"></script>';
+		$dirname = get_option('nimbit_artist');
+		echo $data['subtitle'];
+		echo '<br />';
+		echo '<style>.nmbt_js th { display:none }</style>
+<script src="http://www.nimbitmusic.com/nrp/includes/javascript/email_signup/open_nmbt_form.js"></script>
+<form id="nmbt_form" target="_blank" method="post" action="http://www.nimbitmusic.com/nrp/controllers/artist_subscriber.php">
+<input type="hidden" name="artist_id" value="'.$id.'"/>
+<input type="hidden" name="confirm"   value="1"/>
+<input type="hidden" name="digital_id" />
+<input type="hidden" name="hash"     />
+<table cellpadding="1" cellspacing="1" border="0">
+<td><input type="text"   name="email_address" placeholder="your email" style="width:120px;" id="nmbt_email"/></td>
+<td><input type="submit" name="join" value="Join" style="width:60px;"  id="nmbt_join"/></td>
+</tr>
+</table>
+</form>
+<script src="wp-content/plugins/instant-band-site-by-nimbit/close_nmbt_form.js"></script>';
+
 		echo $args['after_widget'];
 	}
 	function register(){
@@ -578,29 +609,34 @@ register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbi
 register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_promo', 'deactivate'));
 class nimbit_promo {
 	function activate(){
-		set_option('nimbit_promo', array('title'=>'Promo Code'));
+		set_option('nimbit_promo', array('title'=>'Promo Code','subtitle'=>'enter a subtitle here'));
 	}
 	function deactivate(){
 		delete_option('nimbit_promo');
 	}
 	function control(){
 	$data = get_option('nimbit_promo');
-	?><p>Title: <input name="nimbit_promo_title" type="text" value="<?php print $data['title']; ?>" /></p><?php
-		if (isset($_POST['nimbit_promo_title'])){
+	?><p>Title: <input name="nimbit_promo_title" type="text" value="<?php print $data['title']; ?>" /></p>
+	  <p>Subtitle: <input name="nimbit_promo_subtitle" type="text" size="25" value="<?php print $data['subtitle']; ?>" /></p><?php
+		if(isset($_POST['nimbit_promo_title'])){
 			$data['title'] = attribute_escape($_POST['nimbit_promo_title']);
+			set_option('nimbit_promo', $data);
+		}if(isset($_POST['nimbit_promo_subtitle'])){
+			$data['subtitle'] = attribute_escape($_POST['nimbit_promo_subtitle']);
 			set_option('nimbit_promo', $data);
 		}
 	}
 	function widget($args){
 	$data = get_option('nimbit_promo');
+	$dirname = get_option('nimbit_artist');
+
 		echo $args['before_widget'];
 		echo $args['before_title'] . $data['title'] . $args['after_title'];
-		$data = get_option('nimbit_artist');
-		echo 'Enter your promotional code here:';
+		echo $data['subtitle'];
 		echo '<form method="post" action="http://'.nimbitmusic_host().'/nrp/controllers/download_card.php">
-				<input type="hidden" name="dirname" value="'.$data.'"/>
-				<input type="text" size="20" name="code" />
-				<input type="submit" value="Redeem Code" />
+				<input type="hidden" name="dirname" value="'.$dirname.'"/>
+				<input type="text" size="20" name="code" placeholder="promo code"/>
+				<input type="submit" value="Redeem" />
 			</form>';
 		echo $args['after_widget'];
 	}
@@ -659,31 +695,91 @@ class nimbit_player {
 			$checked['yes']='';
 		}
 		?>
-<p style="color:maroon;font-weight:bold;">Drag to the bottom of the sidebar.</p>
-<p>Installs a Streampad player at the bottom of your site. &nbsp;The player automatically accesses all of the music samples from your Nimbit catalog.</p>
-<p>Do you want the player to autoplay?</p></p><label>Yes<input name="nimbit_player_option1" type="radio" value="yes"<?php print $checked['yes']; ?>/></label>
-		<label>No<input name="nimbit_player_option1" type="radio" value="no"<?php print $checked['no']; ?>/></label></p><?php
-		if (isset($_POST['nimbit_player_option1'])){
-			$data['option1'] = attribute_escape($_POST['nimbit_player_option1']);
-			set_option('nimbit_player', $data);
-		}
+
+<p>Installs a XSPF Player in the sidebar of your site. &nbsp;The player automatically accesses all of the music samples from your Nimbit catalog.</p><?php
 	}	
 	function widget($args){
-		$artist = get_option('nimbit_artist');
-		$songs = '';
+	$artist = get_option('nimbit_artist');
+	$data = get_option('nimbit_player');
+		
+	// create doctype
+$dom = new DOMDocument("1.0");
+
+// create root element
+$root = $dom->createElement("playlist");
+$dom->appendChild($root);
+$dom->formatOutput=true;
+
+// create version attribute node
+$version = $dom->createAttribute("version");
+$root->appendChild($version);
+
+// create version attribute value node
+$versionValue = $dom->createTextNode("1");
+$version->appendChild($versionValue);
+
+// create xmlns attribute node
+$xmlns = $dom->createAttribute("xmlns");
+$root->appendChild($xmlns);
+
+// create xmlns attribute value node
+$xmlnsValue = $dom->createTextNode("http://xspf.org/ns/0/");
+$xmlns->appendChild($xmlnsValue);
+
+// create title child element
+$title = $dom->createElement("title");
+$root->appendChild($title);
+
+// create title text node
+$titleText = $dom->createTextNode("Delta Generators");
+$title->appendChild($titleText);
+
+// create tracklist child element
+$tracklist = $dom->createElement("trackList");
+$root->appendChild($tracklist);
+
+$songs = '';
 		$url = 'http://'.nimbitmusic_host().'/artistdata/'.$artist.'/stores/PS/';
 		$xml = simplexml_load_string(nimbit_fetch($url));
+
 		$count = 0;
-		$resulttwo = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/Name');
-		$resultthree = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/SampleFile');
-		foreach($resultthree as $r => $result){
-			$songs .= '<a style="opacity:0.0;" onclick="return false;" href="http://'.nimbitmusic_host().$resultthree[$r].'" />'.$resulttwo[$r].'</a>';
-		}
-	$data = get_option('nimbit_player');
-	if($data['option1']=='yes'){
-		$player_code='<script type="text/javascript" src="http://o.aolcdn.com/art/merge?f=/_media/sp/sp-player.js&f=/_media/sp/sp-player-other.js&expsec=86400&ver=11&autoplay=true"></script>'.$songs;
+$resulttwo = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/Name');
+$resultthree = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/SampleFile');
+foreach($resultthree as $r => $result){
+	$count++;
+	// create track child element
+	$track = $dom->createElement("track");
+	$tracklist->appendChild($track);
+	
+	// create location child element
+	$location = $dom->createElement("location");
+	$track->appendChild($location);
+
+	// create location text node
+	$locationText = $dom->createTextNode('http://'.nimbitmusic_host().$resultthree[$r]);
+	$location->appendChild($locationText);
+	
+	// create song title child element
+	$songtitle = $dom->createElement("title");
+	$track->appendChild($songtitle);
+
+	// create song title text node
+	$songtitleText = $dom->createTextNode($resulttwo[$r]);
+	$songtitle->appendChild($songtitleText);
+	}	
+
+	// save tree to file
+	$dom->save("wp-content/plugins/instant-band-site-by-nimbit/test.xspf");
+
+	
+	if(is_home()){
+	$player_code='<object type="application/x-shockwave-flash" width="250" height="170"
+					data="wp-content/plugins/instant-band-site-by-nimbit/xspf_player.swf?playlist_url=./wp-content/plugins/instant-band-site-by-nimbit/test.xspf&autoload=1&autoresume=1">
+					<param name="movie" value="wp-content/plugins/instant-band-site-by-nimbit/xspf_player.swf?playlist_url=./wp-content/plugins/instant-band-site-by-nimbit/test.xspf&autoload=1&autoresume=1"/></object>';
 	}else{
-		$player_code='<script type="text/javascript" src="http://o.aolcdn.com/art/merge?f=/_media/sp/sp-player.js&f=/_media/sp/sp-player-other.js&expsec=86400&ver=11"></script>'.$songs;
+		$player_code='<object type="application/x-shockwave-flash" width="250" height="170"
+					data="../wp-content/plugins/instant-band-site-by-nimbit/xspf_player.swf?playlist_url=../wp-content/plugins/instant-band-site-by-nimbit/test.xspf&autoload=1&autoresume=1">
+					<param name="movie" value="../wp-content/plugins/instant-band-site-by-nimbit/xspf_player.swf?playlist_url=../wp-content/plugins/instant-band-site-by-nimbit/test.xspf&autoload=1&autoresume=1"/></object>';
 	}
 	echo $args['before_widget'];
     echo $args['before_title'] . '' . $args['after_title'];

@@ -107,13 +107,17 @@ class nimbit_featured_product {
 		$selected = array($data['select']=>'selected');		
 
 		?><p>Title: <input type="text" name="nimbit_featured_product_title" value="<?php print $data['title']; ?>" /></p>
-		<p>Subtitle: <input type="text" name="nimbit_featured_product_subtitle" value="<?php print $data['desc']; ?>" /></p>
-    <p>Choose From Your Nimbit Catalog: <select size="1" name="nimbit_featured_product_select" style="width:224px">
-		<?php
-
-    foreach ($cds     as $pid=>$src) echo '<option '.$selected[$pid].' value="'.$pid.'">'.$names[$pid].'</option>';
-		foreach ($tickets as $pid=>$src) echo '<option '.$selected[$pid].' value="'.$pid.'">'.$names[$pid].'</option>';
-
+		<p>Subtitle: <input type="text" name="nimbit_featured_product_subtitle" size="25" value="<?php print $data['desc']; ?>" /></p>
+		<p>Choose From Your Nimbit Catalog:<?php
+		//when catalog is empty
+		if(empty($cds) & empty($tickets)){
+			echo '<p style="text-align: center;"><strong>no product available</strong></p>';
+		}else{
+		
+			echo '<select size="1" name="nimbit_featured_product_select" style="width:224px">';
+			foreach ($cds     as $pid=>$src) echo '<option '.$selected[$pid].' value="'.$pid.'">'.$names[$pid].'</option>';
+			foreach ($tickets as $pid=>$src) echo '<option '.$selected[$pid].' value="'.$pid.'">'.$names[$pid].'</option>';
+		}
 		?></select>
 		</p>
 		<br />
@@ -165,7 +169,7 @@ class nimbit_featured_product {
 		echo $args['before_widget'];
 		echo $args['before_title'] . $data['title'] . $args['after_title'];
 		echo $data['desc'];
-		echo "<br/><br/><a href='".nimbit_featured_product::url($data['url'])."' <img src=\"$src\" width=\"".$data['height']."\" height=\"".$data['height']."\" /></a><br />";
+		echo "<br/><br/><a href='".nimbit_featured_product::url($data['url'])."' ><img src=\"$src\" width=\"".$data['height']."\" height=\"".$data['height']."\" /></a><br />";
 		echo $args['after_widget'];
 	}
 	function register(){

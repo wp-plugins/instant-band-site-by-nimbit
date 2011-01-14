@@ -547,7 +547,6 @@ class nimbit_subscribe {
 		echo $args['before_title'] . $data['title'] . $args['after_title'];
 		$dirname = get_option('nimbit_artist');
 		echo $data['subtitle'];
-		echo '<br />';
 		echo '<style>.nmbt_js th { display:none }</style>
 <script src="http://www.nimbitmusic.com/nrp/includes/javascript/email_signup/open_nmbt_form.js"></script>
 <form id="nmbt_form" target="_blank" method="post" action="http://www.nimbitmusic.com/nrp/controllers/artist_subscriber.php">

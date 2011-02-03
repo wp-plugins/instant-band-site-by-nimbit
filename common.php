@@ -139,9 +139,9 @@ function nimbit_content_wrapper($title, $content)
 
 function nimbit_store_content()
 {
-  $script  = '<div style="margin-top:-30px;"><script src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.get_option('nimbit_artist').'/store"></script>';
+  $script  = '<div style="margin-top:-30px;"><script type="text/javascript" src="http://'.nimbitmusic_host().'/tags/javascript/artists/'.get_option('nimbit_artist').'/store"></script>';
 
-  $script .= '<script>var nimbit_options = '.json_encode($options = nimbit_store_options()).';</script></div>';
+  $script .= '<script type="text/javascript">var nimbit_options = '.json_encode($options = nimbit_store_options()).';</script></div>';
 
   // note: mustn't have carraige returns in css as wordpress replaces them with <p> tags that are invalid in css
   // see: http://wordpress.org/support/topic/unwanted-ltpgt-tags-added-to-pages

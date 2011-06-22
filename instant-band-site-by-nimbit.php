@@ -3,7 +3,7 @@
  Plugin Name: Instant Band Site by Nimbit
  Plugin URI: http://wordpress.org/extend/plugins/instant-band-site-by-nimbit/
  Description: With the Nimbit Instant Band Site plug-in, it's easier than ever to create and maintain and artist website that provides the perfect showcase and storefront to connect with fans.
- Version: 0.2.6
+ Version: 0.2.7
  Author: Nimbit
  Author URI:
  License: GPL2

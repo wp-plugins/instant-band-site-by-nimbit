@@ -1,6 +1,6 @@
 <?php
 //featured product widget
-//add_action("widgets_init", array('nimbit_featured_product', 'register'));
+add_action("widgets_init", array('nimbit_featured_product', 'register'));
 register_activation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_featured_product', 'activate'));
 register_deactivation_hook('instant-band-site-by-nimbit/instant-band-site-by-nimbit.php', array('nimbit_featured_product', 'deactivate'));
 class nimbit_featured_product {

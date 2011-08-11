@@ -737,36 +737,37 @@ $title->appendChild($titleText);
 $tracklist = $dom->createElement("trackList");
 $root->appendChild($tracklist);
 
-$songs = '';
+		$songs = '';
 		$url = 'http://'.nimbitmusic_host().'/artistdata/'.$artist.'/stores/PS/';
-		$xml = simplexml_load_string(nimbit_fetch($url));
+		$xml = @simplexml_load_string(nimbit_fetch($url));
+		if($xml)
+		{
+			$count = 0;
+			$resulttwo = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/Name');
+			$resultthree = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/SampleFile');
+			foreach($resultthree as $r => $result){
+				$count++;
+				// create track child element
+				$track = $dom->createElement("track");
+				$tracklist->appendChild($track);
+				
+				// create location child element
+				$location = $dom->createElement("location");
+				$track->appendChild($location);
 
-		$count = 0;
-$resulttwo = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/Name');
-$resultthree = $xml->xpath('//response/RecordCompany/Artist/Catalog/Product/SongTitles/SongTitle/SampleFile');
-foreach($resultthree as $r => $result){
-	$count++;
-	// create track child element
-	$track = $dom->createElement("track");
-	$tracklist->appendChild($track);
-	
-	// create location child element
-	$location = $dom->createElement("location");
-	$track->appendChild($location);
+				// create location text node
+				$locationText = $dom->createTextNode('http://'.nimbitmusic_host().$resultthree[$r]);
+				$location->appendChild($locationText);
+				
+				// create song title child element
+				$songtitle = $dom->createElement("title");
+				$track->appendChild($songtitle);
 
-	// create location text node
-	$locationText = $dom->createTextNode('http://'.nimbitmusic_host().$resultthree[$r]);
-	$location->appendChild($locationText);
-	
-	// create song title child element
-	$songtitle = $dom->createElement("title");
-	$track->appendChild($songtitle);
-
-	// create song title text node
-	$songtitleText = $dom->createTextNode($resulttwo[$r]);
-	$songtitle->appendChild($songtitleText);
-	}	
-
+				// create song title text node
+				$songtitleText = $dom->createTextNode($resulttwo[$r]);
+				$songtitle->appendChild($songtitleText);
+				}	
+		}
 	// save tree to file
 	$dom->save("wp-content/plugins/instant-band-site-by-nimbit/test.xspf");
 
